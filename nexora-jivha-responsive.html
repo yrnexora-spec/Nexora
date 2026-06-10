@@ -1,0 +1,2383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
+<meta name="theme-color" content="#000000">
+<title>NEXORA — Engineering the Extraordinary</title>
+<meta name="description" content="Nexora — Intelligent Systems. Real Impact. Rarest Standard. Engineering cutting-edge solutions in software, mechatronics, robotics, and automation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   NEXORA ABSOLUTE COLOR LAW
+   ============================================================ */
+:root{
+  --black:#000000;
+  --s1:#080808;
+  --s2:#0d0d0d;
+  --s3:#0f0f0f;
+  --chrome-light:#ffffff;
+  --chrome-mid:#ffffff;
+  --chrome-dark:#ffffff;
+  --chrome-ghost:rgba(255,255,255,0.04);
+  --border-dark:#1a1a1a;
+  --border-light:#2f2f2f;
+  --glow-soft:rgba(255,255,255,0.06);
+  --glow-mid:rgba(255,255,255,0.12);
+  --glow-bright:rgba(255,255,255,0.18);
+  --text-primary:#ffffff;
+  --text-secondary:#fffbfb;
+  --text-muted:#3a3a3a;
+  --chrome-grad:linear-gradient(180deg,#ffffff 0%,#888888 50%,#ffffff 100%);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',sans-serif;
+  background:#000000;
+  color:#888888;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+::selection{background:rgba(255,255,255,0.1);color:#fff}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:#1a1a1a}
+img,svg{max-width:100%;height:auto}
+a{-webkit-tap-highlight-color:transparent;color:inherit;text-decoration:none}
+
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:#000000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 1s,visibility 1s;
+}
+#loader.done{opacity:0;visibility:hidden;pointer-events:none}
+#loader-brand{
+  font-size:0.6rem;font-weight:900;letter-spacing:0.5em;
+  color:var(--chrome-mid);text-transform:uppercase;
+  margin-bottom:2rem;
+}
+#loader-track{width:200px;height:1px;background:rgba(255,255,255,0.05);overflow:hidden}
+#loader-fill{width:0;height:100%;background:linear-gradient(90deg,#333,#fff,#333);transition:width 0.06s linear}
+#loader-pct{font-size:0.5rem;color:#333;margin-top:0.8rem;letter-spacing:0.4em;font-family:monospace}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  padding:1.2rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:all 0.4s;
+}
+nav.scrolled{
+  background:rgba(0,0,0,0.9);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-dark);
+  padding:0.8rem 3rem;
+}
+.nav-brand{
+  font-size:0.65rem;font-weight:900;letter-spacing:0.35em;
+  color:#ffffff;text-transform:uppercase;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:#444;font-size:0.55rem;font-weight:400;
+  letter-spacing:0.2em;text-transform:uppercase;
+  transition:color 0.2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:1px;background:#fff;
+  transition:width 0.3s;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-toggle{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  background:none;border:none;padding:6px;z-index:200;
+}
+.nav-toggle span{display:block;width:22px;height:1px;background:#888;transition:all 0.3s}
+.nav-toggle.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+/* ── GLOBAL SECTION ── */
+section{position:relative;z-index:2}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 3rem}
+
+/* ── TYPOGRAPHY SYSTEM ── */
+.micro-label{
+  font-size:0.6rem;font-weight:400;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:#444;margin-bottom:1rem;
+}
+.chrome-grad{
+  background:var(--chrome-grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.section-title{
+  font-size:5rem;font-weight:900;
+  letter-spacing:-0.04em;color:#ffffff;
+  line-height:0.95;
+}
+.project-title{
+  font-size:7rem;font-weight:900;
+  letter-spacing:-0.05em;color:#ffffff;
+  line-height:0.9;
+}
+.feature-heading{font-size:2rem;font-weight:700;color:#ffffff;letter-spacing:-0.02em}
+.body-text{font-size:1.1rem;line-height:1.9;color:#888888}
+.emphasis-line{
+  font-size:2.5rem;font-weight:800;color:#ffffff;
+  letter-spacing:-0.03em;line-height:1.1;
+  position:relative;display:inline-block;
+}
+.emphasis-line::after{
+  content:'';position:absolute;bottom:-6px;left:0;width:0;height:1px;
+  background:#fff;transition:none;
+}
+.emphasis-line.animated::after{
+  animation:lineReveal 0.8s ease-out forwards;
+}
+@keyframes lineReveal{0%{width:0}100%{width:100%}}
+
+/* ── CHROME LINE TRAVELER ── */
+.chrome-divider{
+  width:100%;height:1px;background:var(--border-dark);
+  position:relative;overflow:hidden;
+}
+.chrome-divider::after{
+  content:'';position:absolute;top:-1px;left:-40px;
+  width:40px;height:3px;
+  background:linear-gradient(90deg,transparent,#fff,transparent);
+  animation:travelLine 3s linear infinite;
+}
+@keyframes travelLine{0%{left:-40px}100%{left:calc(100% + 40px)}}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease-out,transform 0.7s ease-out}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* ── CTA BUTTON ── */
+.cta-btn{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0 2rem;height:52px;
+  border:1px solid #333;background:transparent;
+  color:#ffffff;font-family:'Inter',sans-serif;
+  font-size:0.65rem;font-weight:700;letter-spacing:0.2em;
+  text-transform:uppercase;cursor:pointer;
+  transition:background 0.15s,color 0.15s,border-color 0.15s;
+  text-decoration:none;
+}
+.cta-btn:hover{background:#ffffff;color:#000000;border-color:#ffffff}
+
+/* ── SCROLL INDICATOR ── */
+.scroll-indicator{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  z-index:10;
+}
+.scroll-line{width:1px;height:60px;background:rgba(255,255,255,0.1);position:relative;overflow:hidden}
+.scroll-dot{
+  position:absolute;top:-6px;left:-2px;
+  width:5px;height:5px;border-radius:50%;background:#fff;
+  animation:scrollDot 2s ease-in-out infinite;
+}
+@keyframes scrollDot{0%{top:-6px;opacity:0}20%{opacity:1}100%{top:60px;opacity:0}}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero{
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:0;overflow:hidden;position:relative;
+}
+#hero-canvas{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;
+}
+.hero-content{
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+
+    text-align: right;
+    width: 500px;
+    z-index: 100;
+
+    left: auto;
+    transform: none;
+}
+@media(max-width:600px){
+  .hero-content{
+    position:relative;
+    right:auto;bottom:auto;left:auto;
+    transform:none;
+    width:100%;
+    text-align:left;
+    padding:5rem 1.5rem 5rem;
+    margin-top:auto;
+  }
+  #hero{
+    justify-content:flex-end;
+    align-items:flex-start;
+  }
+}
+.hero-micro{
+  font-size:0.5rem;font-weight:400;letter-spacing:0.35em;
+  text-transform:uppercase;color:#333;
+  margin-bottom:2rem;
+}
+.hero-brand{
+  font-size:16vw;font-weight:900;
+  letter-spacing:-0.06em;line-height:0.85;
+  background:linear-gradient(180deg,#ffffff 0%,#888888 50%,#ffffff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:1.5rem;
+  position:relative;display:inline-block;
+  padding:0.08em 0.12em;
+  isolation:isolate;
+  will-change:transform;
+}
+.hero-brand::before{
+  content:'';position:absolute;left:50%;top:50%;
+  width:clamp(210px,38vw,520px);height:clamp(210px,38vw,520px);
+  transform:translate(-50%,-50%) rotate(45deg);
+  border:1px solid rgba(255,255,255,0.16);
+  background:
+    linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.01) 42%,rgba(255,255,255,0.09)),
+    radial-gradient(circle at 35% 30%,rgba(255,255,255,0.12),transparent 34%);
+  box-shadow:inset 0 0 44px rgba(255,255,255,0.045),0 0 70px rgba(255,255,255,0.05);
+  z-index:-1;pointer-events:none;
+}
+.hero-brand::after{
+  content:'';position:absolute;left:50%;top:50%;
+  width:clamp(140px,26vw,360px);height:clamp(140px,26vw,360px);
+  transform:translate(-50%,-50%) rotate(45deg);
+  border:1px solid rgba(255,255,255,0.07);
+  z-index:-1;pointer-events:none;
+}
+.hero-tagline{
+  font-size:1.2rem;font-weight:400;color:#c0c0c0;
+  min-height:2em;margin-bottom:1.5rem;
+  letter-spacing:0.01em;
+}
+.hero-tagline .cursor{
+  display:inline-block;width:2px;height:1em;
+  background:#c0c0c0;margin-left:3px;vertical-align:middle;
+  animation:blink 0.7s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-desc{
+  font-size:1rem;line-height:1.9;color:#555;
+  max-width:600px;margin:0 0 2.5rem auto;
+  opacity:0;transform:translateY(20px);
+  transition:opacity 1s 1s,transform 1s 1s;
+}
+.hero-desc.vis{opacity:1;transform:translateY(0)}
+
+/* ============================================================
+   PROJECTS INTRO
+   ============================================================ */
+#projects{padding:8rem 0 4rem}
+.projects-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:start;gap:4rem;
+  margin-bottom:5rem;
+}
+.projects-entry-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--border-dark);
+}
+.project-entry{
+  padding:4rem 3rem;cursor:pointer;position:relative;overflow:hidden;
+  transition:background 0.3s;
+}
+.project-entry:first-child{border-right:1px solid var(--border-dark)}
+.project-entry::before{
+  content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.02) 39px,rgba(255,255,255,0.02) 40px),
+    repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.02) 39px,rgba(255,255,255,0.02) 40px);
+  opacity:0;transition:opacity 0.4s;
+}
+.project-entry:hover::before{opacity:1}
+.project-entry:hover{background:var(--s1)}
+.proj-number{
+  font-size:8rem;font-weight:900;color:#111;letter-spacing:-0.05em;
+  line-height:1;position:absolute;top:1.5rem;right:2rem;
+  pointer-events:none;
+}
+.proj-name{font-size:2.5rem;font-weight:900;color:#ffffff;letter-spacing:-0.03em;margin-bottom:0.5rem}
+.proj-sub{font-size:0.8rem;color:#555;letter-spacing:0.05em}
+
+/* ============================================================
+   SECTION LAYOUT
+   ============================================================ */
+.section-pad{padding:7rem 0}
+.section-pad-sm{padding:4rem 0}
+
+/* ── HARDWARE SCHEMATIC ── */
+.schematic{
+  border:1px solid var(--border-dark);background:#000;
+  padding:3rem;margin:3rem 0;
+  box-shadow:0 0 40px rgba(255,255,255,0.03);
+  position:relative;overflow:hidden;
+}
+.schematic-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
+}
+.schematic-node{
+  border:1px solid #1a1a1a;padding:1rem 1.5rem;
+  background:#050505;text-align:center;min-width:130px;
+  position:relative;transition:border-color 0.2s,background 0.2s;
+}
+.schematic-node:hover{border-color:#333;background:#0a0a0a}
+.schematic-node .sn-label{
+  font-family:monospace;font-size:0.65rem;
+  color:#ffffff;letter-spacing:0.08em;
+  display:block;margin-bottom:0.2rem;
+}
+.schematic-node .sn-sub{font-family:monospace;font-size:0.5rem;color:#444;letter-spacing:0.05em}
+.schematic-connector{
+  flex:1;height:1px;background:var(--border-dark);
+  position:relative;overflow:hidden;min-width:20px;
+}
+.schematic-connector::after{
+  content:'';position:absolute;top:-1px;left:-20px;
+  width:20px;height:3px;
+  background:linear-gradient(90deg,transparent,#fff,transparent);
+  animation:connectorPulse 2s linear infinite;
+}
+.schematic-connector:nth-child(4n)::after{animation-delay:0.5s}
+.schematic-connector:nth-child(4n+2)::after{animation-delay:1s}
+.schematic-connector:nth-child(4n+3)::after{animation-delay:1.5s}
+@keyframes connectorPulse{0%{left:-20px}100%{left:calc(100% + 20px)}}
+
+/* ── ALERT LAYERS ── */
+.alert-layer{
+  border-left:3px solid #2a2a2a;
+  padding:2rem 2.5rem;
+  background:#000;margin-bottom:1px;
+  opacity:0;transform:translateX(-30px);
+  transition:opacity 0.6s,transform 0.6s,background 0.15s,border-color 0.15s;
+}
+.alert-layer.vis{opacity:1;transform:translateX(0)}
+.alert-layer:hover{background:var(--s2);border-left-color:#ffffff}
+.alert-layer .al-label{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:#333;margin-bottom:0.8rem;font-family:monospace}
+.alert-layer .al-heading{font-size:1.5rem;font-weight:700;color:#ffffff;margin-bottom:0.6rem;letter-spacing:-0.02em}
+.alert-layer .al-body{font-size:1rem;line-height:1.8;color:#666}
+
+/* ── STATS ROW ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:4rem 0}
+.stat-block{
+  padding:3rem;border-right:1px solid var(--border-dark);
+  position:relative;
+}
+.stat-block:last-child{border-right:none}
+.stat-number{
+  font-size:7rem;font-weight:900;color:#ffffff;
+  letter-spacing:-0.05em;line-height:1;
+  display:block;
+}
+.stat-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#444;margin-top:0.5rem;display:block}
+.stat-underline{
+  width:0;height:1px;background:#fff;margin-top:1rem;
+  animation:statUnderline 1.5s ease-out forwards 0.5s;
+}
+@keyframes statUnderline{0%{width:0}100%{width:60px}}
+.stat-shimmer{
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);
+  background-size:200% 100%;
+  background-clip:text;-webkit-background-clip:text;
+  animation:shimmer 3s linear infinite;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── WHO ROWS ── */
+.who-row{
+  display:flex;align-items:center;gap:1.5rem;
+  padding:1.2rem 0;
+  border-bottom:1px solid var(--border-dark);
+  transition:background 0.15s;cursor:default;
+}
+.who-row:first-child{border-top:1px solid var(--border-dark)}
+.who-row:hover{background:var(--s1);padding-left:1rem}
+.who-icon{flex-shrink:0;width:20px;height:20px;color:#555;transition:color 0.15s}
+.who-row:hover .who-icon{color:#fff}
+.who-title{font-size:0.9rem;font-weight:700;color:#ffffff;margin-right:1rem;white-space:nowrap}
+.who-desc{font-size:0.9rem;color:#555;line-height:1.6}
+
+/* ── COMPARISON TABLE ── */
+.chrome-table{width:100%;border-collapse:collapse;margin:2rem 0}
+.chrome-table thead tr{border-top:2px solid #ffffff}
+.chrome-table th{
+  padding:1rem 1.5rem;text-align:left;
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  font-weight:900;border-bottom:1px solid var(--border-dark);
+}
+.chrome-table th:first-child{color:#333}
+.chrome-table th.col-legacy{color:#444}
+.chrome-table th.col-ava{color:#ffffff}
+.chrome-table td{
+  padding:1rem 1.5rem;font-size:0.9rem;
+  border-bottom:1px solid var(--border-dark);
+}
+.chrome-table td.row-label{color:#888}
+.chrome-table td.col-legacy{color:#333;text-decoration:line-through}
+.chrome-table td.col-ava{color:#ffffff;font-weight:600}
+.chrome-table tbody tr{
+  opacity:0;transform:translateY(8px);
+  transition:opacity 0.4s,transform 0.4s,background 0.15s;
+}
+.chrome-table tbody tr.vis{opacity:1;transform:translateY(0)}
+.chrome-table tbody tr:hover{background:var(--s2)}
+
+/* ── CNN PIPELINE ── */
+.pipeline-wrap{
+  display:flex;align-items:center;
+  margin:3rem 0;overflow-x:auto;padding-bottom:1rem;
+}
+.pipe-node{
+  flex-shrink:0;border:1px solid #1a1a1a;background:#000;
+  width:120px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:monospace;font-size:0.6rem;color:#ffffff;
+  letter-spacing:0.08em;text-transform:uppercase;
+  opacity:0;transform:scale(0.8);
+  transition:opacity 0.3s,transform 0.3s,border-color 0.15s,background 0.15s,box-shadow 0.15s;
+}
+.pipe-node.vis{opacity:1;transform:scale(1)}
+.pipe-node:hover{border-color:#ffffff;background:var(--s2);box-shadow:0 0 20px rgba(255,255,255,0.05)}
+.pipe-arrow{
+  flex-shrink:0;width:40px;height:1px;background:#1a1a1a;
+  position:relative;overflow:hidden;
+}
+.pipe-arrow::after{
+  content:'';position:absolute;top:-1px;left:-20px;
+  width:20px;height:3px;
+  background:linear-gradient(90deg,transparent,#fff,transparent);
+  animation:connectorPulse 2s linear infinite;
+}
+.pipe-arrow-head{
+  position:absolute;right:-1px;top:-3px;
+  width:0;height:0;
+  border-top:3px solid transparent;
+  border-bottom:3px solid transparent;
+  border-left:5px solid #333;
+}
+
+/* ── DOSHA PANELS ── */
+.dosha-panel{
+  border:1px solid #111;border-left:4px solid;
+  padding:2rem 2.5rem;margin-bottom:1px;
+  transition:background 0.15s,border-left-color 0.15s;
+}
+.dosha-panel:hover{background:var(--s2)}
+.dosha-panel.vata{border-left-color:#555}
+.dosha-panel.pitta{border-left-color:#888}
+.dosha-panel.kapha{border-left-color:#aaa}
+.dosha-panel:hover.vata,.dosha-panel:hover.pitta,.dosha-panel:hover.kapha{border-left-color:#fff}
+.dosha-heading{
+  font-size:1.25rem;font-weight:700;color:#ffffff;
+  margin-bottom:0.6rem;letter-spacing:-0.01em;
+}
+.dosha-panel:hover .dosha-heading{
+  background:var(--chrome-grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+/* ── BARRIER BARS ── */
+.barrier-item{margin-bottom:0.5rem}
+.barrier-problem{
+  font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:#444;margin-bottom:0.3rem;
+}
+.barrier-bar{
+  width:100%;height:2px;background:var(--chrome-mid);
+  position:relative;overflow:hidden;
+  transition:none;
+}
+.barrier-bar.shatter{
+  animation:barrierShatter 0.8s ease forwards;
+}
+@keyframes barrierShatter{0%{width:100%;opacity:1}100%{width:0%;opacity:0}}
+.barrier-solution{
+  font-size:0.95rem;color:#ffffff;
+  opacity:0;padding:0.6rem 0;
+  transition:opacity 0.5s 0.8s;
+}
+.barrier-solution.vis{opacity:1}
+
+/* ── PILLARS GRID ── */
+.pillars-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  border-top:1px solid var(--border-dark);
+  margin:3rem 0;
+}
+.pillar-col{
+  padding:2rem 1.5rem;border-right:1px solid var(--border-dark);
+  opacity:0;transform:translateY(50px);
+  transition:opacity 0.5s,transform 0.5s,border-top-width 0.15s,border-top-color 0.15s;
+}
+.pillar-col:last-child{border-right:none}
+.pillar-col.vis{opacity:1;transform:translateY(0)}
+.pillar-col:hover{border-top:2px solid #fff;margin-top:-1px}
+.pillar-num{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:#2a2a2a;margin-bottom:1rem;font-family:monospace}
+.pillar-heading{font-size:0.9rem;font-weight:700;color:#ffffff;margin-bottom:0.8rem;letter-spacing:-0.01em}
+.pillar-body{font-size:0.8rem;line-height:1.8;color:#555}
+
+/* ── WIREFRAME GLOBE CONTAINER ── */
+#globe-canvas{
+  position:absolute;inset:0;z-index:0;
+  opacity:0.4;
+}
+
+/* ── STANDARD BLOCKS ── */
+.standard-block{
+  display:grid;grid-template-columns:60px 200px 1fr;
+  align-items:start;gap:2rem;
+  padding:2.5rem 0;
+  border-top:1px solid var(--border-dark);
+  opacity:0;transform:translateX(-30px);
+  transition:opacity 0.6s,transform 0.6s;
+}
+.standard-block.vis{opacity:1;transform:translateX(0)}
+.standard-block:last-child{border-bottom:1px solid var(--border-dark)}
+.std-num{font-size:0.6rem;letter-spacing:0.3em;color:#2a2a2a;font-family:monospace;padding-top:0.2rem}
+.std-heading{font-size:1.5rem;font-weight:700;color:#ffffff;letter-spacing:-0.02em;line-height:1.2}
+.std-body{font-size:1rem;line-height:1.9;color:#666}
+
+/* ── PARTNER CLOSING ── */
+.partner-closing-line{
+  font-size:2.2rem;font-weight:700;color:#ffffff;
+  text-align:center;line-height:1.4;letter-spacing:-0.02em;
+  opacity:0;transform:translateY(30px);
+  transition:opacity 1s,transform 1s;
+}
+.partner-closing-line.vis{opacity:1;transform:translateY(0)}
+.partner-final{
+  font-size:4rem;font-weight:900;
+  letter-spacing:-0.04em;text-align:center;
+  background:linear-gradient(180deg,#ffffff 0%,#888888 50%,#ffffff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-shadow:none;
+  filter:drop-shadow(0 0 40px rgba(255,255,255,0.15));
+  opacity:0;transform:translateY(20px);
+  transition:opacity 1s 0.3s,transform 1s 0.3s;
+}
+.partner-final.vis{opacity:1;transform:translateY(0)}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border-dark);
+  padding:4rem 0 2.5rem;
+  background:#000;
+}
+.footer-contacts{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:3rem;margin-bottom:3rem;
+}
+.footer-item{
+  display:flex;align-items:center;gap:0.8rem;
+  font-size:0.85rem;color:#555;
+  transition:color 0.15s;
+  position:relative;
+}
+.footer-item::after{
+  content:'';position:absolute;bottom:-2px;left:0;
+  width:0;height:1px;background:#fff;
+  transition:width 0.2s;
+}
+.footer-item:hover{color:#fff}
+.footer-item:hover::after{width:100%}
+.footer-item svg{flex-shrink:0;color:#333;transition:color 0.15s}
+.footer-item:hover svg{color:#fff}
+.footer-tagline{
+  font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:#2a2a2a;text-align:center;
+}
+.footer-copy{
+  font-size:0.55rem;color:#111;text-align:center;
+  margin-top:1.5rem;letter-spacing:0.1em;
+}
+.text-center{text-align:center}
+.mt1{margin-top:1rem}
+.mt2{margin-top:2rem}
+
+/* ── 3D CANVAS SECTIONS ── */
+.canvas-section{position:relative;overflow:hidden}
+.threejs-canvas{
+  position:absolute;inset:0;z-index:0;
+  width:100%;height:100%;
+}
+.canvas-content{position:relative;z-index:2}
+
+/* ── RADAR CHART CONTAINER ── */
+#radar-wrap{
+  height:400px;position:relative;
+  margin:3rem 0;
+}
+#radar-canvas{width:100%;height:100%}
+.radar-label{
+  position:absolute;
+  font-family:monospace;font-size:0.6rem;color:#888;
+  letter-spacing:0.1em;text-transform:uppercase;
+  white-space:nowrap;pointer-events:none;
+}
+
+/* ── NEURAL NETWORK CONTAINER ── */
+#neural-wrap{height:100%;position:absolute;inset:0}
+#neural-canvas{width:100%;height:100%;display:block}
+
+/* ── TONGUE 3D ── */
+#tongue-wrap{height:400px;position:relative;margin:3rem 0}
+#tongue-canvas{width:100%;height:100%;display:block}
+.tongue-label{
+  position:absolute;
+  border:1px solid #222;background:#000;
+  padding:0.4rem 0.8rem;
+  font-family:monospace;font-size:0.6rem;color:#fff;
+  letter-spacing:0.08em;text-transform:uppercase;
+  pointer-events:none;white-space:normal;
+  max-width:min(260px,42vw);
+  line-height:1.35;
+  transition:border-color 0.2s;
+}
+.tongue-label::before{
+  content:'';position:absolute;width:20px;height:1px;
+  background:#222;top:50%;right:100%;
+}
+.tongue-label.label-left::before{left:100%;right:auto}
+
+/* ── MOBILE ── */
+@media(max-width:1024px){
+  .hero-brand{font-size:20vw}
+  .hero-brand::before{width:clamp(190px,52vw,420px);height:clamp(190px,52vw,420px)}
+  .hero-brand::after{width:clamp(132px,38vw,300px);height:clamp(132px,38vw,300px)}
+  .section-title{font-size:3.5rem}
+  .project-title{font-size:5rem}
+  .projects-header{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr}
+  .stat-block{border-right:none;border-bottom:1px solid var(--border-dark)}
+  .pillars-grid{grid-template-columns:repeat(3,1fr)}
+  .standard-block{grid-template-columns:40px 1fr;grid-template-rows:auto auto}
+  .std-body{grid-column:1/-1}
+}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  nav.scrolled{padding:0.7rem 1.5rem}
+  .container{padding:0 1.5rem}
+  .nav-links{
+    position:fixed;inset:0;background:rgba(0,0,0,0.97);
+    backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
+    flex-direction:column;justify-content:center;align-items:center;
+    gap:2.5rem;opacity:0;visibility:hidden;
+    transition:opacity 0.3s,visibility 0.3s;z-index:150;
+  }
+  .nav-links.open{opacity:1;visibility:visible}
+  .nav-links a{font-size:0.9rem}
+  .nav-toggle{display:flex}
+  .projects-entry-row{grid-template-columns:1fr}
+  .project-entry:first-child{border-right:none;border-bottom:1px solid var(--border-dark)}
+  .section-title{font-size:2.5rem}
+  .project-title{font-size:3.5rem}
+  .pillars-grid{grid-template-columns:1fr 1fr}
+  .pillar-col:last-child{grid-column:span 2}
+  .schematic-inner{flex-direction:column;align-items:stretch}
+  .schematic-connector{width:1px;height:30px;align-self:center}
+  .pipeline-wrap{gap:0}
+  #tongue-wrap{height:clamp(460px,72vw,560px)}
+  .tongue-label{
+    max-width:min(190px,44vw);
+    padding:0.35rem 0.55rem;
+    font-size:0.52rem;
+    letter-spacing:0.05em;
+  }
+  .partner-closing-line{font-size:1.5rem}
+  .partner-final{font-size:2.5rem}
+  .footer-contacts{flex-direction:column;align-items:center;gap:1.5rem}
+  .standard-block{grid-template-columns:1fr}
+  /* Mobile typography improvements */
+  .stat-number{font-size:4.5rem}
+  .who-title{white-space:normal}
+  .who-row{flex-wrap:wrap;gap:0.8rem}
+  .hero-desc{margin:0 0 2rem;font-size:0.9rem}
+  .hero-tagline{font-size:1rem}
+  .cta-btn{width:100%;justify-content:center}
+  .hero-brand::before,.hero-brand::after{display:none}
+  .section-pad{padding:4rem 0}
+  .section-pad-sm{padding:2.5rem 0}
+  #projects{padding:4rem 0 2rem}
+  #avawatch{padding:5rem 0 4rem!important}
+  .proj-name{font-size:1.8rem}
+  .proj-number{font-size:5rem;top:1rem;right:1rem}
+  .project-entry{padding:2.5rem 1.5rem}
+  .feature-heading{font-size:1.5rem}
+  .emphasis-line{font-size:1.8rem}
+  .stats-row{margin:2rem 0}
+  .stat-block{padding:2rem 1.5rem}
+  .chrome-table{font-size:0.8rem}
+  .chrome-table th,.chrome-table td{padding:0.75rem 0.75rem}
+  .alert-layer{padding:1.5rem}
+  .schematic{padding:1.5rem}
+  .schematic-node{min-width:unset;width:100%}
+}
+@media(max-width:480px){
+  .hero-brand{font-size:24vw}
+  .hero-brand::before{width:72vw;height:72vw}
+  .hero-brand::after{width:52vw;height:52vw}
+  .section-title{font-size:2rem}
+  .project-title{font-size:2.8rem}
+  .pillars-grid{grid-template-columns:1fr}
+  .pillar-col:last-child{grid-column:span 1}
+  .projects-header{grid-template-columns:1fr}
+  .pipeline-wrap{
+    flex-direction:column;
+    align-items:stretch;
+    overflow-x:visible;
+    gap:0;
+  }
+  .pipe-node{width:100%;height:46px}
+  .pipe-arrow{width:1px;height:28px;align-self:center}
+  .pipe-arrow::after{
+    top:-20px;left:-1px;width:3px;height:20px;
+    background:linear-gradient(180deg,transparent,#fff,transparent);
+    animation:connectorPulseVertical 2s linear infinite;
+  }
+  .pipe-arrow-head{
+    right:auto;left:-3px;top:auto;bottom:-1px;
+    border-left:3px solid transparent;
+    border-right:3px solid transparent;
+    border-top:5px solid #333;
+    border-bottom:none;
+  }
+  #tongue-wrap{height:560px;margin:2.5rem 0}
+  .tongue-label{max-width:46vw;font-size:0.48rem;padding:0.32rem 0.46rem}
+  .stat-number{font-size:3.5rem}
+  .feature-heading{font-size:1.3rem}
+  .body-text{font-size:0.95rem}
+  .standard-block{gap:1rem;padding:1.5rem 0}
+  .std-heading{font-size:1.2rem}
+  .dosha-panel{padding:1.25rem 1.25rem}
+  .alert-layer .al-heading{font-size:1.2rem}
+  .partner-final{font-size:2rem}
+  .chrome-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .footer-item{font-size:0.8rem}
+}
+@keyframes connectorPulseVertical{0%{top:-20px}100%{top:calc(100% + 20px)}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div id="loader-brand">NEXORA</div>
+  <div id="loader-track"><div id="loader-fill"></div></div>
+  <div id="loader-pct">0%</div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">Nexora</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#hero" class="active">Home</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#standards">Standards</a></li>
+    <li><a href="#partner">Partner</a></li>
+    <li><a href="#contact-footer">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ============================================================
+     SECTION 01 — HERO
+     ============================================================ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-micro">NEXORA ENGINEERING — PUNE, INDIA — EST. 2024</div>
+    <div class="hero-brand" id="hero-brand"></div>
+    <div class="hero-tagline" id="hero-tagline"><span class="cursor"></span></div>
+    <div class="hero-desc" id="hero-desc">
+      There are companies that build things. And then there are companies that change things. Nexora sits firmly, unapologetically, in the second category. We are not a vendor. We are not a contractor. We are the rarest kind of engineering partner — one that brings together the precision of mechanical design, the intelligence of software, and the sensitivity of electronics into systems that don't just function, but matter. Systems that protect lives, restore health, and push the boundary of what technology can genuinely do for humanity.
+    </div>
+    <a href="#projects" class="cta-btn" id="hero-cta" style="opacity:0">Explore Our Work</a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"><div class="scroll-dot"></div></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 02 — PROJECTS INTRO
+     ============================================================ -->
+<section id="projects" class="section-pad">
+<div class="container">
+  <div class="projects-header">
+    <div>
+      <div class="micro-label reveal">Our Portfolio</div>
+      <h2 class="section-title reveal">Our<br>Projects</h2>
+    </div>
+    <div style="padding-top:1rem">
+      <p class="body-text reveal" style="color:#555;max-width:500px">A Portfolio of Problems Solved, Lives Protected, and Futures Built</p>
+    </div>
+  </div>
+</div>
+<div class="chrome-divider" style="margin-bottom:0"></div>
+<div class="projects-entry-row">
+  <div class="project-entry reveal" onclick="document.getElementById('avawatch').scrollIntoView({behavior:'smooth'})">
+    <div class="proj-number">01</div>
+    <div class="micro-label">Project 01</div>
+    <div class="proj-name">AvaWatch</div>
+    <div class="proj-sub">Smart Avalanche Detection and Monitoring System</div>
+  </div>
+  <div class="project-entry reveal" onclick="document.getElementById('jivha').scrollIntoView({behavior:'smooth'})">
+    <div class="proj-number">02</div>
+    <div class="micro-label">Project 02</div>
+    <div class="proj-name">Jivha Darpan</div>
+    <div class="proj-sub">Novel IoT Device for Early-Stage Disease Detection Through Tongue Analysis</div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================
+     SECTION 03 — AVAWATCH
+     ============================================================ -->
+<section id="avawatch" class="canvas-section" style="min-height:100vh;padding:8rem 0 6rem">
+  <canvas id="mountain-canvas" class="threejs-canvas"></canvas>
+  <div class="canvas-content container">
+    <div class="micro-label reveal">Project 01</div>
+    <h2 class="project-title reveal">Ava<br>Watch</h2>
+    <p class="body-text reveal" style="color:#c0c0c0;font-size:1.3rem;margin:1rem 0 3rem;max-width:600px">Smart Avalanche Detection and Monitoring System</p>
+
+    <h3 class="feature-heading reveal" style="margin-bottom:1.5rem">The World Had a Problem. Nexora Solved It.</h3>
+    <p class="body-text reveal">Every year, avalanches erase communities. They bury mountaineers, collapse infrastructure, and sever the lifelines of remote populations — often within seconds, and almost always without warning. The global response to this crisis has historically been expensive, logistically nightmarish, and chronically too slow.</p>
+    <p class="body-text reveal" style="margin-top:1rem">Seismic sensor arrays require dense, costly networks across vast mountain terrain. Infrasound detection systems generate false positives at alarming rates, triggering unnecessary evacuations and eroding public trust. Satellite monitoring suffers from latency that renders it useless in real-time emergency scenarios. Radar systems cost fortunes and see nothing beyond their fixed line of sight.</p>
+    <p class="body-text reveal" style="margin-top:1rem">The gap between an avalanche beginning and a human being receiving a warning has, for decades, been measured in minutes — and in lives lost.</p>
+    <div style="margin:2rem 0">
+      <span class="emphasis-line reveal" id="ava-emphasis">Nexora closed that gap.</span>
+    </div>
+  </div>
+</section>
+
+<!-- AVAWATCH — WHAT WE BUILT -->
+<section class="section-pad-sm">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:2rem">What We Built</h3>
+  <p class="body-text reveal">AvaWatch is a compact, ruggedized, fully integrated avalanche detection and alert module — engineered from first principles to be deployable anywhere, affordable at scale, and accurate enough to be trusted with lives.</p>
+  <p class="body-text reveal" style="margin-top:1rem">At its core, the system combines an ESP32 microcontroller, an MPU6050 six-axis accelerometer-gyroscope, a LoRa 433MHz long-range transceiver, an SMA antenna, and an onboard buzzer — all housed within an IP67-rated weatherproof enclosure designed to survive the most extreme environments on earth.</p>
+
+  <!-- Hardware Schematic -->
+  <div class="schematic reveal">
+    <div style="font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:#333;margin-bottom:2rem;font-family:monospace">HARDWARE ARCHITECTURE — AVAWATCH v1.0</div>
+    <div class="schematic-inner">
+      <div class="schematic-node">
+        <span class="sn-label">ESP32 MCU</span>
+        <span class="sn-sub">MICROCONTROLLER</span>
+      </div>
+      <div class="schematic-connector"></div>
+      <div class="schematic-node">
+        <span class="sn-label">MPU6050</span>
+        <span class="sn-sub">6-AXIS IMU</span>
+      </div>
+      <div class="schematic-connector"></div>
+      <div class="schematic-node">
+        <span class="sn-label">LoRa 433MHz</span>
+        <span class="sn-sub">TRANSCEIVER</span>
+      </div>
+      <div class="schematic-connector"></div>
+      <div class="schematic-node">
+        <span class="sn-label">SMA ANTENNA</span>
+        <span class="sn-sub">RF OUTPUT</span>
+      </div>
+      <div class="schematic-connector"></div>
+      <div class="schematic-node">
+        <span class="sn-label">ONBOARD BUZZER</span>
+        <span class="sn-sub">ALERT OUTPUT</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="body-text reveal" style="margin-top:2rem">The moment AvaWatch detects the precise vibrational signature of an avalanche, three things happen simultaneously and instantaneously:</p>
+
+  <!-- Alert Layers -->
+  <div style="margin:2rem 0">
+    <div class="alert-layer" id="layer1">
+      <div class="al-label">LAYER 01 / IMMEDIATE RESPONSE</div>
+      <div class="al-heading">Immediate Audible Alert</div>
+      <div class="al-body">The onboard buzzer activates, delivering an immediate, unmistakable alarm to anyone within direct proximity of the module.</div>
+    </div>
+    <div class="alert-layer" id="layer2">
+      <div class="al-label">LAYER 02 / NETWORK CASCADE</div>
+      <div class="al-heading">Long-Range Network Cascade</div>
+      <div class="al-body">The LoRa transceiver transmits distress signals to every connected module across the deployment network — covering up to 8 kilometres per node — creating a cascading wave of alerts that blankets entire mountain ranges without requiring a single cellular tower or internet connection.</div>
+    </div>
+    <div class="alert-layer" id="layer3">
+      <div class="al-label">LAYER 03 / PERSONAL NOTIFICATION</div>
+      <div class="al-heading">Direct Personal Notification</div>
+      <div class="al-body">The ESP32's built-in Bluetooth pushes distress signals directly to smartphones in the vicinity. Every hiker, every skier, every mountaineer, every resident — alerted personally, instantly, regardless of network coverage.</div>
+    </div>
+  </div>
+  <p class="body-text reveal" style="text-align:center;color:#888;font-size:1.3rem;font-weight:700;letter-spacing:-0.01em">Three layers. Zero delay. No gaps.</p>
+</div>
+</section>
+
+<!-- AVAWATCH — WHY UNLIKE ANYTHING -->
+<section class="section-pad-sm">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:2rem">Why AvaWatch Is Unlike Anything Before It</h3>
+  <p class="body-text reveal">The engineering philosophy behind AvaWatch is not simply to match existing systems — it is to render their limitations obsolete.</p>
+  <p class="body-text reveal" style="margin-top:1rem">Traditional detection demands dense networks. AvaWatch deploys strategically and sparsely, with each module covering terrain that would previously have required dozens of sensors. Deployment costs collapse. Logistical complexity disappears.</p>
+  <p class="body-text reveal" style="margin-top:1rem">Traditional infrasound detection is plagued by false positives from thunder, industrial noise, and distant explosions. AvaWatch uses an accelerometer tuned specifically to the ground vibration signatures of avalanche events — not sound, not seismic approximations, but the actual physical motion of snow-mass displacement. False positives are dramatically reduced. False negatives become near-impossible.</p>
+  <p class="body-text reveal" style="margin-top:1rem">Traditional systems alert control centres. AvaWatch alerts people — directly, personally, on the device already in their pocket. The democratisation of life-saving information is not a feature of AvaWatch. It is its foundation.</p>
+  <p class="body-text reveal" style="margin-top:1rem">Solar-powered operation enables indefinite deployment in remote locations with zero infrastructure support. The modular architecture means a network can be expanded with a single additional unit, snapped into the existing system without reconfiguration. The entire system runs on C++, lean and efficient, engineered for low power consumption and long operational life in conditions that would destroy lesser hardware.</p>
+
+  <!-- Radar Chart -->
+  <div id="radar-wrap" style="margin-top:3rem">
+    <canvas id="radar-canvas"></canvas>
+    <div class="radar-label" id="rl-0" style="display:none">Cost Efficiency</div>
+    <div class="radar-label" id="rl-1" style="display:none">Coverage</div>
+    <div class="radar-label" id="rl-2" style="display:none">Detection Accuracy</div>
+    <div class="radar-label" id="rl-3" style="display:none">Response Speed</div>
+    <div class="radar-label" id="rl-4" style="display:none">Scalability</div>
+  </div>
+</div>
+</section>
+
+<!-- AVAWATCH — HUMAN STAKES -->
+<section class="section-pad-sm" style="border-top:1px solid var(--border-dark)">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:0">The Human Stakes</h3>
+  <div class="stats-row">
+    <div class="stat-block">
+      <span class="stat-number" data-count="120" data-suffix="+">0</span>
+      <div class="stat-underline"></div>
+      <span class="stat-label">lives lost in Indian Himalayas since 2021</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-number" data-count="22000">0</span>
+      <div class="stat-underline"></div>
+      <span class="stat-label">killed in the 1970 Huascarán avalanche, Peru</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-number" data-count="27">0</span>
+      <div class="stat-underline"></div>
+      <span class="stat-label">mountaineers killed in Uttarakhand, 2022</span>
+    </div>
+  </div>
+  <p class="body-text reveal" style="margin-top:2rem">Deadly avalanches in the Indian Himalayas alone have killed more than 120 people since 2021. The 1970 Huascarán avalanche in Peru killed 22,000. In 2022, twenty-seven mountaineers on a training course in Uttarakhand were killed in a single event.</p>
+  <p class="body-text reveal" style="margin-top:1rem">These were not inevitable deaths. They were the product of a warning gap that technology had the power to close — and had not, until now.</p>
+  <p class="body-text reveal" style="margin-top:1rem">AvaWatch is Nexora's answer to every one of those statistics. Not a prototype. Not a proof of concept. A deployable, validated, commercially viable system ready to be placed on mountain slopes around the world.</p>
+</div>
+</section>
+
+<!-- AVAWATCH — WHO BUILT FOR -->
+<section class="section-pad-sm" style="border-top:1px solid var(--border-dark)">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:2rem">Who It Is Built For</h3>
+  <div id="who-built">
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span class="who-title">Military &amp; Defence</span>
+      <span class="who-desc">Military and defence organisations operating in high-altitude terrain.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17l9-9 9 9"/><path d="M12 8V3"/></svg>
+      <span class="who-title">Ski Resorts</span>
+      <span class="who-desc">Ski resorts whose reputation and legal liability depend on real-time safety infrastructure.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      <span class="who-title">Search &amp; Rescue</span>
+      <span class="who-desc">Search and rescue teams who need accurate, real-time event data to direct their response.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="15"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/></svg>
+      <span class="who-title">Local Governments</span>
+      <span class="who-desc">Local governments and municipalities protecting mountain communities.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span class="who-title">Mining &amp; Forestry</span>
+      <span class="who-desc">Mining and forestry operations in avalanche-prone regions.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+      <span class="who-title">Research Institutions</span>
+      <span class="who-desc">Environmental and geological research institutions studying snow mass dynamics.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span class="who-title">Mountaineering Orgs</span>
+      <span class="who-desc">Mountaineering organisations running expeditions into hazardous terrain.</span>
+    </div>
+  </div>
+  <p class="body-text reveal" style="margin-top:2rem">AvaWatch serves them all — and it does so at a cost structure that makes deployment viable even for resource-limited regions where avalanche risk is highest and protection has historically been lowest.</p>
+</div>
+</section>
+
+<!-- AVAWATCH — COMPARISON TABLE -->
+<section class="section-pad-sm" style="border-top:1px solid var(--border-dark)">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:2rem">The Numbers That Matter</h3>
+  <div style="overflow-x:auto">
+    <table class="chrome-table" id="cmp-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="col-legacy">Legacy Systems</th>
+          <th class="col-ava">AvaWatch</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-label">Sensor Density Required</td><td class="col-legacy">Very High</td><td class="col-ava">Low — Strategic Placement</td></tr>
+        <tr><td class="row-label">Per-Unit Cost</td><td class="col-legacy">High</td><td class="col-ava">Fraction of Legacy Cost</td></tr>
+        <tr><td class="row-label">False Positive Rate</td><td class="col-legacy">High</td><td class="col-ava">Dramatically Reduced</td></tr>
+        <tr><td class="row-label">Real-Time Personal Alert</td><td class="col-legacy">No</td><td class="col-ava">Yes — Direct to Smartphone</td></tr>
+        <tr><td class="row-label">Remote Deployment</td><td class="col-legacy">Difficult</td><td class="col-ava">Solar-Powered, Fully Autonomous</td></tr>
+        <tr><td class="row-label">Network Expansion</td><td class="col-legacy">Complex</td><td class="col-ava">Single-Module Addition</td></tr>
+        <tr><td class="row-label">Coverage Per Node</td><td class="col-legacy">Limited</td><td class="col-ava">Up to 8 Kilometres</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================
+     SECTION 04 — JIVHA DARPAN
+     ============================================================ -->
+<section id="jivha" class="canvas-section" style="min-height:100vh;padding:8rem 0 6rem;border-top:1px solid var(--border-dark)">
+  <canvas id="neural-canvas" class="threejs-canvas"></canvas>
+  <div class="canvas-content container">
+    <div class="micro-label reveal">Project 02</div>
+    <h2 class="project-title reveal">Jivha<br>Darpan</h2>
+    <p class="body-text reveal" style="color:#c0c0c0;font-size:1.3rem;margin:1rem 0 3rem;max-width:700px">Novel IoT Device for Early-Stage Disease Detection Through Tongue Analysis</p>
+
+    <h3 class="feature-heading reveal" style="font-style:italic;color:#888;margin-bottom:1.5rem">Ancient Wisdom. Cutting-Edge Intelligence. One Revolutionary Device.</h3>
+    <p class="body-text reveal">In Ayurveda — one of the world's oldest and most sophisticated medical traditions — the tongue has always been considered a mirror to the body's internal health. Its colour, texture, coating, cracks, and markings reveal the state of organs, the balance of doshas, and the presence of toxins long before conventional medicine would detect a symptom.</p>
+    <p class="body-text reveal" style="margin-top:1rem">For thousands of years, this diagnostic wisdom existed only in the hands of skilled practitioners. Inaccessible to most. Unavailable at 2am when a parent notices something wrong with their child. Absent in rural areas where the nearest specialist is hours away.</p>
+    <div style="margin:2rem 0">
+      <span class="emphasis-line reveal" id="jivha-emphasis">Nexora brought it into the 21st century.</span>
+    </div>
+    <p class="body-text reveal">Jivha Darpan — meaning "Tongue Mirror" — is an IoT-powered, AI-driven health assessment device that captures, analyses, and interprets tongue characteristics in real time, delivering actionable health insights to individuals anywhere in the world, at any time, without a single needle, consultation fee, or hospital visit.</p>
+
+    <!-- Tongue 3D Map -->
+    <div id="tongue-wrap" class="reveal" style="margin-top:3rem">
+      <canvas id="tongue-canvas"></canvas>
+      <div class="tongue-label" id="tl-tip">TIP — THYROID</div>
+      <div class="tongue-label" id="tl-front">FRONT — LUNGS &amp; HEART</div>
+      <div class="tongue-label" id="tl-middle">MIDDLE — LIVER SPLEEN STOMACH</div>
+      <div class="tongue-label" id="tl-back">BACK — KIDNEYS &amp; LARGE INTESTINES</div>
+    </div>
+  </div>
+</section>
+
+<!-- JIVHA DARPAN — WHAT WE BUILT -->
+<section class="section-pad-sm">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:2rem">What We Built</h3>
+  <p class="body-text reveal">Jivha Darpan integrates a Raspberry Pi 4B+ single-board computer with a dedicated Pi Camera module, a TensorFlow and Keras-powered Convolutional Neural Network, and an automated reporting system that delivers diagnostic results directly to a user's email — complete with health assessment and recommended intervention guidance.</p>
+  <p class="body-text reveal" style="margin-top:1rem">The process is elegantly simple from the user's perspective. The device is pointed at the tongue. An image is captured. Within moments, the CNN model — trained on a diverse dataset of labelled healthy and unhealthy tongue images — extracts features, identifies patterns, and classifies the tongue's condition. The result is transmitted directly to the user.</p>
+  <p class="body-text reveal" style="margin-top:1rem">Behind that simplicity is a sophisticated multi-layer analysis engine:</p>
+
+  <!-- CNN Pipeline -->
+  <div class="pipeline-wrap" id="pipeline" style="margin:2.5rem 0">
+    <div class="pipe-node" data-idx="0">CAPTURE</div>
+    <div class="pipe-arrow"><div class="pipe-arrow-head"></div></div>
+    <div class="pipe-node" data-idx="1">TRANSMIT</div>
+    <div class="pipe-arrow"><div class="pipe-arrow-head"></div></div>
+    <div class="pipe-node" data-idx="2">PREPROCESS</div>
+    <div class="pipe-arrow"><div class="pipe-arrow-head"></div></div>
+    <div class="pipe-node" data-idx="3">CNN</div>
+    <div class="pipe-arrow"><div class="pipe-arrow-head"></div></div>
+    <div class="pipe-node" data-idx="4">EXTRACT</div>
+    <div class="pipe-arrow"><div class="pipe-arrow-head"></div></div>
+    <div class="pipe-node" data-idx="5">CLASSIFY</div>
+    <div class="pipe-arrow"><div class="pipe-arrow-head"></div></div>
+    <div class="pipe-node" data-idx="6">REPORT</div>
+  </div>
+
+  <p class="body-text reveal"><strong style="color:#bbb;font-weight:700">Image Capture and Transmission.</strong> The Pi Camera captures a high-resolution image of the tongue surface, recording colour gradients, texture, coating presence and density, crack patterns, swelling indicators, and papillae condition.</p>
+  <p class="body-text reveal" style="margin-top:1rem"><strong style="color:#bbb;font-weight:700">Preprocessing.</strong> The image is resized, normalised, and noise-reduced to ensure analytical uniformity regardless of lighting conditions or capture angle.</p>
+  <p class="body-text reveal" style="margin-top:1rem"><strong style="color:#bbb;font-weight:700">CNN Feature Extraction.</strong> The neural network processes the image through multiple interconnected layers, extracting intricate visual features — colour variations, texture nuances, coating thickness and location — that correspond to known Ayurvedic and biomedical diagnostic indicators.</p>
+  <p class="body-text reveal" style="margin-top:1rem"><strong style="color:#bbb;font-weight:700">Classification and Reporting.</strong> The model classifies the tongue condition, generates an analysis result, and delivers a comprehensive report via email — enabling users to track their health over time and share results with healthcare providers.</p>
+</div>
+</section>
+
+<!-- JIVHA DARPAN — WHAT IT CAN DETECT -->
+<section class="section-pad-sm" style="border-top:1px solid var(--border-dark)">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:2rem">What Jivha Darpan Can Detect</h3>
+  <p class="body-text reveal">The diagnostic intelligence embedded in Jivha Darpan spans a remarkable range of health indicators:</p>
+
+  <div style="margin:2rem 0">
+    <div class="dosha-panel vata reveal">
+      <div class="dosha-heading">Vata Imbalance</div>
+      <p class="body-text" style="font-size:0.95rem">A grey, black, or brown tongue coating signals Vata toxin accumulation and imbalance.</p>
+    </div>
+    <div class="dosha-panel pitta reveal">
+      <div class="dosha-heading">Pitta Imbalance</div>
+      <p class="body-text" style="font-size:0.95rem">Yellow, orange, or red coatings indicate Pitta imbalances — conditions such as hyperacidity, ulcers, or high fever.</p>
+    </div>
+    <div class="dosha-panel kapha reveal">
+      <div class="dosha-heading">Kapha Imbalance</div>
+      <p class="body-text" style="font-size:0.95rem">White coating reveals Kapha toxins and may indicate poor digestion or systemic toxin build-up.</p>
+    </div>
+  </div>
+
+  <p class="body-text reveal" style="margin-top:1rem">Vertical or transverse cracks indicate Vata derangement and can correspond to spinal tension, insomnia, nervousness, or chronic anxiety. Swelling correlates to inflammation, fluid retention, allergic response, or hypothyroidism. Red inflamed papillae indicate heat and Pitta energy in plasma and blood tissues. A pale tongue flags low red blood cell count, poor circulation, or potential anaemia. Teeth marks along the perimeter indicate malabsorption and nutritional deficiency. Hollowness in the heart region of the tongue can indicate emotional imbalance, grief, or depression.</p>
+  <p class="body-text reveal" style="margin-top:1rem">Each of these signals maps to specific organs. The front of the tongue corresponds to the upper gastrointestinal tract, lungs, and heart. The middle section maps to the liver, spleen, and stomach. The rear section correlates to the large intestines and kidneys. The tip corresponds to the thyroid.</p>
+  <p class="body-text reveal" style="margin-top:1.5rem;color:#c0c0c0;font-size:1.1rem;font-weight:600">Jivha Darpan does not guess. It applies the accumulated diagnostic wisdom of Ayurveda through the analytical precision of a trained neural network — and delivers results in minutes.</p>
+</div>
+</section>
+
+<!-- JIVHA DARPAN — PROBLEM IT DESTROYS -->
+<section class="section-pad-sm" style="border-top:1px solid var(--border-dark)">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:3rem">The Problem It Destroys</h3>
+
+  <div id="barrier-grid" style="margin-bottom:3rem">
+    <div class="barrier-item">
+      <div class="barrier-problem">Barrier 01 — Inaccessibility</div>
+      <div class="barrier-bar" data-barrier="0"></div>
+      <div class="barrier-solution">Healthcare made universally accessible — no appointment, no commute, no waiting room.</div>
+    </div>
+    <div class="barrier-item" style="margin-top:1.5rem">
+      <div class="barrier-problem">Barrier 02 — Delayed Diagnosis</div>
+      <div class="barrier-bar" data-barrier="1"></div>
+      <div class="barrier-solution">Instant results delivered to your device within moments of capture.</div>
+    </div>
+    <div class="barrier-item" style="margin-top:1.5rem">
+      <div class="barrier-problem">Barrier 03 — High Cost</div>
+      <div class="barrier-bar" data-barrier="2"></div>
+      <div class="barrier-solution">Compact hardware at accessible price points — no ongoing consultation fees.</div>
+    </div>
+    <div class="barrier-item" style="margin-top:1.5rem">
+      <div class="barrier-problem">Barrier 04 — Wasted Resources</div>
+      <div class="barrier-bar" data-barrier="3"></div>
+      <div class="barrier-solution">Early detection reduces downstream resource strain on healthcare systems.</div>
+    </div>
+    <div class="barrier-item" style="margin-top:1.5rem">
+      <div class="barrier-problem">Barrier 05 — Compromised Quality of Life</div>
+      <div class="barrier-bar" data-barrier="4"></div>
+      <div class="barrier-solution">Proactive monitoring transforms health outcomes before conditions become critical.</div>
+    </div>
+  </div>
+
+  <p class="body-text reveal">Healthcare inaccessibility is not a developing-world problem. It is a universal one. Busy professionals have no time for preventive check-ups. Rural populations have no access to specialists. Elderly individuals face mobility barriers to routine assessment. Parents cannot constantly monitor subtle changes in their children's health. And across all demographics, the cost of frequent medical consultation is prohibitive.</p>
+  <p class="body-text reveal" style="margin-top:1rem">The result is a global epidemic of delayed diagnosis — conditions that could have been caught early, identified when still manageable, intervened upon before they became serious, instead progressing unchecked until they demand expensive, disruptive treatment.</p>
+  <p class="body-text reveal" style="margin-top:1rem">Jivha Darpan intervenes at the source. It places a non-invasive, accurate, and immediate diagnostic tool in the hands of every person — requiring no clinical training, no specialist appointment, and no significant financial outlay. It turns daily health monitoring from a luxury into a universal right.</p>
+</div>
+</section>
+
+<!-- JIVHA DARPAN — PEOPLE IT SERVES -->
+<section class="section-pad-sm" style="border-top:1px solid var(--border-dark)">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:2rem">The People It Serves</h3>
+  <div id="who-serves">
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="who-title">Health-Conscious Individuals</span>
+      <span class="who-desc">Who want to monitor their wellness proactively rather than reactively.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <span class="who-title">Busy Professionals</span>
+      <span class="who-desc">Who lack time for routine check-ups but cannot afford to ignore their health.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span class="who-title">Parents</span>
+      <span class="who-desc">Who want real-time visibility into their family's well-being.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      <span class="who-title">Early Technology Adopters</span>
+      <span class="who-desc">Who understand that prevention is the most powerful medicine.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span class="who-title">Preventive Care Advocates</span>
+      <span class="who-desc">Who recognise that early detection transforms health outcomes at both individual and systemic levels.</span>
+    </div>
+    <div class="who-row reveal">
+      <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+      <span class="who-title">Healthcare Professionals</span>
+      <span class="who-desc">Seeking a supplementary, non-invasive assessment tool.</span>
+    </div>
+  </div>
+  <p class="body-text reveal" style="margin-top:2rem">And beyond individual users — medical researchers gain access to large-scale tongue analysis datasets that can contribute to the broader understanding of Ayurvedic diagnostics. Healthcare systems gain a tool that reduces the burden on clinical resources by enabling first-line assessment at home.</p>
+</div>
+</section>
+
+<!-- JIVHA DARPAN — WHY EXTRAORDINARY -->
+<section class="section-pad-sm" style="border-top:1px solid var(--border-dark)">
+<div class="container">
+  <h3 class="feature-heading reveal" style="margin-bottom:0">Why It Is Extraordinary</h3>
+  <div class="pillars-grid" id="jivha-pillars">
+    <div class="pillar-col">
+      <div class="pillar-num">01</div>
+      <div class="pillar-heading">Non-Invasive</div>
+      <div class="pillar-body">No blood. No needles. No discomfort. A device that assesses your health the way your body has been signalling it for thousands of years — through the tongue — simply made accessible and intelligent.</div>
+    </div>
+    <div class="pillar-col">
+      <div class="pillar-num">02</div>
+      <div class="pillar-heading">Cost-Effective</div>
+      <div class="pillar-body">The hardware is compact, portable, and built around components that keep costs accessible without compromising analytical power.</div>
+    </div>
+    <div class="pillar-col">
+      <div class="pillar-num">03</div>
+      <div class="pillar-heading">Culturally Rooted</div>
+      <div class="pillar-body">Jivha Darpan does not replace traditional medicine. It amplifies it. It takes the diagnostic wisdom that Ayurvedic practitioners have refined over millennia and makes it available to anyone, anywhere, at any time.</div>
+    </div>
+    <div class="pillar-col">
+      <div class="pillar-num">04</div>
+      <div class="pillar-heading">Remote-Access Enabled</div>
+      <div class="pillar-body">Results are delivered via email, accessible from any device, in any location. A patient in a remote village and a professional in a metropolitan office receive the same quality of analysis.</div>
+    </div>
+    <div class="pillar-col">
+      <div class="pillar-num">05</div>
+      <div class="pillar-heading">Continuously Improving</div>
+      <div class="pillar-body">The CNN model can be retrained as datasets expand, precision increases over time, and future iterations will extend detection capability to an even broader range of conditions.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================
+     SECTION 05 — NEXORA STANDARD
+     ============================================================ -->
+<section id="standards" class="canvas-section section-pad" style="border-top:1px solid var(--border-dark)">
+  <canvas id="globe-canvas" class="threejs-canvas"></canvas>
+  <div class="canvas-content container">
+    <div class="micro-label text-center reveal" style="text-align:center">Our Philosophy</div>
+    <h2 class="section-title reveal" style="text-align:center;margin-bottom:2rem">The Nexora Standard</h2>
+
+    <p class="body-text reveal" style="text-align:center;max-width:700px;margin:0 auto 1rem">These two projects — AvaWatch and Jivha Darpan — are not isolated achievements. They are expressions of a single, unwavering philosophy.</p>
+    <p class="body-text reveal" style="text-align:center;max-width:700px;margin:0 auto 1rem">Every system Nexora builds is held to five absolute standards:</p>
+    <div style="text-align:center;margin:2rem 0 3rem">
+      <span class="emphasis-line reveal" id="nexora-emphasis" style="font-size:2rem">Engineering must serve humanity.</span>
+    </div>
+
+    <div id="standard-blocks" style="margin-top:2rem">
+      <div class="standard-block">
+        <div class="std-num">01</div>
+        <div class="std-heading">Innovation with Irreplaceable Purpose</div>
+        <div class="std-body">We do not build what already exists. We build what the world needs and does not yet have. Every design decision traces back to a genuine human need — a life to be protected, a disease to be caught early, a community to be made safer.</div>
+      </div>
+      <div class="standard-block">
+        <div class="std-num">02</div>
+        <div class="std-heading">End-to-End Engineering Excellence</div>
+        <div class="std-body">From concept and circuit design to firmware architecture, mechanical enclosure, deployment strategy, and business model — Nexora owns the full lifecycle. Our clients receive not components, but complete, deployable solutions.</div>
+      </div>
+      <div class="standard-block">
+        <div class="std-num">03</div>
+        <div class="std-heading">Cost-Conscious Brilliance</div>
+        <div class="std-body">The most sophisticated solution is worthless if it cannot be deployed where it is needed. Nexora engineers at the intersection of advanced capability and genuine affordability — because the communities that most need our systems are often the ones least able to pay luxury prices.</div>
+      </div>
+      <div class="standard-block">
+        <div class="std-num">04</div>
+        <div class="std-heading">Scalability as a Core Design Principle</div>
+        <div class="std-body">A system that works for one mountain should work for a mountain range. A device that monitors one patient should scale to monitor millions. Nexora designs for the world, not the proof of concept.</div>
+      </div>
+      <div class="standard-block">
+        <div class="std-num">05</div>
+        <div class="std-heading">Accountability Without Compromise</div>
+        <div class="std-body">Every certificate, every deliverable, every system that carries the Nexora name is backed by the same commitment to quality, professionalism, and real-world reliability. We do not ship until we are certain.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 06 — PARTNER WITH NEXORA
+     ============================================================ -->
+<section id="partner" class="canvas-section" style="min-height:100vh;display:flex;align-items:center;padding:8rem 0;border-top:1px solid var(--border-dark)">
+  <canvas id="partner-canvas" class="threejs-canvas"></canvas>
+  <div class="canvas-content container" style="text-align:center">
+    <div class="micro-label reveal" style="text-align:center">Ready to Build</div>
+    <h2 style="font-size:6rem;font-weight:900;letter-spacing:-0.05em;line-height:0.9;margin-bottom:3rem;background:linear-gradient(180deg,#fff 0%,#888 50%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" class="reveal">Partner<br>With Nexora</h2>
+
+    <p class="body-text reveal" style="text-align:center;max-width:680px;margin:0 auto 1rem">You are not simply looking at a portfolio. You are looking at evidence — evidence that a team exists that can take the hardest problems in engineering and emerge with solutions that are elegant, deployable, affordable, and genuinely transformative.</p>
+    <p class="body-text reveal" style="text-align:center;max-width:680px;margin:0 auto 1rem">Whether you are a technology organisation seeking a partner capable of delivering what others cannot, an institution seeking to deploy next-generation systems in the field, a government body addressing safety or healthcare infrastructure, or an investor seeking to back the teams most likely to define the next decade of engineering — Nexora is ready.</p>
+    <p class="body-text reveal" style="text-align:center;max-width:680px;margin:0 auto 1rem">We are not looking for transactions. We are not interested in one-off commissions. We are looking for the partners who believe, as we do, that the right engineering — applied with discipline, creativity, and a genuine sense of purpose — can change the world.</p>
+    <p class="body-text reveal" style="text-align:center;max-width:680px;margin:0 auto 3rem">That is what Nexora is. That is what we have already demonstrated. And that is what we will continue to build, for every partner who is worthy of it.</p>
+
+    <div style="margin:3rem 0 2rem;max-width:700px;margin-left:auto;margin-right:auto">
+      <div class="partner-closing-line" id="pc1">The rarest gem is not the one that shines the brightest in a showcase.</div>
+      <div class="partner-closing-line" id="pc2" style="transition-delay:0.3s">It is the one that, when placed in the hands of the right partner, changes everything.</div>
+    </div>
+
+    <div class="partner-final" id="partner-final" style="margin:2rem 0 3rem">That gem is Nexora.</div>
+
+    <a href="#contact-footer" class="cta-btn reveal">Begin the Conversation</a>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 07 — FOOTER
+     ============================================================ -->
+<footer id="contact-footer">
+<div class="container">
+  <div class="footer-contacts">
+    <a href="mailto:nexora@rediffmail.com" class="footer-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      nexora@rediffmail.com
+    </a>
+    <a href="tel:+918421840407" class="footer-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1H6.6a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 5.55 5.55l.95-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+      +91-84218 40407
+    </a>
+    <a href="https://www.nexoracult.in" target="_blank" rel="noopener" class="footer-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      nexoracult.in
+    </a>
+    <div class="footer-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Pune, Maharashtra, India
+    </div>
+  </div>
+  <div class="footer-tagline">Nexora — Intelligent Systems. Real Impact. Rarest Standard.</div>
+  <div class="footer-copy">&copy; 2024 Nexora Engineering. All rights reserved.</div>
+</div>
+</footer>
+
+<!-- THREE.JS CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+/* ============================================================
+   NEXORA CHROME UNIVERSE — COMPLETE ENGINE
+   ============================================================ */
+
+'use strict';
+const IS_MOBILE = window.innerWidth <= 768;
+const DPR = Math.min(window.devicePixelRatio, 2);
+let mouseX = 0, mouseY = 0, mouseNX = 0, mouseNY = 0;
+
+/* ── LOADER ── */
+(function(){
+  const fill = document.getElementById('loader-fill');
+  const pct  = document.getElementById('loader-pct');
+  const ldr  = document.getElementById('loader');
+  let p = 0;
+  const iv = setInterval(() => {
+    p += Math.random() * 12 + 4;
+    if(p > 100) p = 100;
+    fill.style.width = p + '%';
+    pct.textContent = Math.floor(p) + '%';
+    if(p >= 100){ clearInterval(iv); setTimeout(() => { ldr.classList.add('done'); initAll(); }, 400); }
+  }, 50);
+})();
+
+/* ── MOUSE ── */
+window.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  mouseNX = (e.clientX / window.innerWidth) * 2 - 1;
+  mouseNY = -(e.clientY / window.innerHeight) * 2 + 1;
+});
+
+/* ── NAV ── */
+function initNav(){
+  const nav = document.getElementById('navbar');
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), {passive:true});
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('open');
+    links.classList.toggle('open');
+    document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      toggle.classList.remove('open'); links.classList.remove('open'); document.body.style.overflow = '';
+    });
+  });
+  const secs = document.querySelectorAll('section[id]');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if(!ticking){ requestAnimationFrame(() => {
+      let cur = '';
+      secs.forEach(s => { if(window.scrollY >= s.offsetTop - 200) cur = s.id; });
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+cur));
+      ticking = false;
+    }); ticking = true; }
+  }, {passive:true});
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO THREE.JS SCENE
+   ══════════════════════════════════════════════════════════════ */
+function initHeroScene(){
+  const canvas = document.getElementById('hero-canvas');
+  const W = window.innerWidth, H = window.innerHeight;
+
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:false, antialias:!IS_MOBILE});
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(DPR);
+  renderer.setClearColor(0x000000, 1);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, W/H, 0.1, 200);
+  camera.position.z = 8;
+
+  // Chrome env map
+  const envMap = makeChromeEnvMap();
+
+  // — Lights —
+  const ambLight = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambLight);
+  const spotPositions = [[5,5,5],[-5,5,5],[5,-5,5],[-5,-5,5]];
+  spotPositions.forEach(p => {
+    const s = new THREE.PointLight(0xffffff, 2, 30);
+    s.position.set(...p); scene.add(s);
+  });
+
+  // — Chrome Double-Chevron Logo Shape —
+  // Matches the Nexora logo: two bold italic parallelogram slabs
+  const gemMat = new THREE.MeshStandardMaterial({
+    color:0xffffff, metalness:1.0, roughness:0.02,
+    envMap, envMapIntensity:3, transparent:true
+  });
+
+  // Helper: build a parallelogram slab (extruded)
+  // Points defined in XY, extruded in Z
+  function makeParallelogramSlab(xOff, lean, w, h, depth, mat){
+    // lean = how much the top shifts right (italic slant)
+    const shape = new THREE.Shape();
+    shape.moveTo(xOff + lean, h/2);         // top-left
+    shape.lineTo(xOff + lean + w, h/2);     // top-right
+    shape.lineTo(xOff + w, -h/2);           // bottom-right
+    shape.lineTo(xOff, -h/2);               // bottom-left
+    shape.closePath();
+
+    const extSettings = {
+      depth: depth,
+      bevelEnabled: true,
+      bevelThickness: 0.06,
+      bevelSize: 0.06,
+      bevelSegments: 3
+    };
+    const geo = new THREE.ExtrudeGeometry(shape, extSettings);
+    // Center Z
+    geo.translate(0, 0, -depth/2);
+    return new THREE.Mesh(geo, mat);
+  }
+
+  const slabDepth = 0.55;
+  const slabH     = 3.2;
+  const slabW     = 1.0;
+  const lean      = 0.85;   // italic tilt
+
+ // ====================================
+// ====================================
+// CUSTOM LOGO
+// ====================================
+
+const textureLoader = new THREE.TextureLoader();
+
+const gem = new THREE.Group();
+
+textureLoader.load("logo.png", function(texture) {
+
+    texture.colorSpace = THREE.SRGBColorSpace;
+
+    const aspect = texture.image.width / texture.image.height;
+
+    // Increase logo size
+    const logoHeight = 12;
+    const logoWidth = logoHeight * aspect;
+
+    const logoMaterial = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        side: THREE.DoubleSide
+    });
+
+    const logoGeometry = new THREE.PlaneGeometry(
+        logoWidth,
+        logoHeight
+    );
+
+    const logoMesh = new THREE.Mesh(
+        logoGeometry,
+        logoMaterial
+    );
+
+    logoMesh.position.set(0, 0, 0);
+
+    gem.add(logoMesh);
+});
+
+scene.add(gem);
+
+  // Tilt the whole group slightly for a dynamic 3D look
+  gem.rotation.x = 0.08;
+  scene.add(gem);
+
+  // — Perspective Grid —
+  const gridMat = new THREE.LineBasicMaterial({color:0x111111});
+  const gridGeo = new THREE.BufferGeometry();
+  const gridLines = [];
+  for(let i = -20; i <= 20; i++){
+    gridLines.push(-20, -4, -8,  20, -4, -8); // would need projection
+  }
+  const gridGroup = new THREE.Group();
+  const gridSize = 40, gridDivs = 20;
+  for(let i = -gridDivs/2; i <= gridDivs/2; i++){
+    const t = i * (gridSize/gridDivs);
+    const lH = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-gridSize/2,-4,t), new THREE.Vector3(gridSize/2,-4,t)]);
+    const lV = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(t,-4,-gridSize/2), new THREE.Vector3(t,-4,gridSize/2)]);
+    gridGroup.add(new THREE.Line(lH, gridMat));
+    gridGroup.add(new THREE.Line(lV, gridMat));
+  }
+  scene.add(gridGroup);
+
+  // — Particles —
+  const pCount = IS_MOBILE ? 500 : 2000;
+  const pGeo = new THREE.BufferGeometry();
+  const pPos = new Float32Array(pCount * 3);
+  const pVel = [];
+  for(let i = 0; i < pCount; i++){
+    pPos[i*3]   = (Math.random()-0.5)*40;
+    pPos[i*3+1] = (Math.random()-0.5)*40;
+    pPos[i*3+2] = (Math.random()-0.5)*40;
+    const dist = Math.sqrt(pPos[i*3]**2 + pPos[i*3+1]**2 + pPos[i*3+2]**2);
+    const speed = 0.003 + 0.02 / (dist + 0.1);
+    pVel.push({x:(Math.random()-0.5)*speed, y:(Math.random()-0.5)*speed, z:(Math.random()-0.5)*speed});
+  }
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  const pMat = new THREE.PointsMaterial({color:0xffffff, size:0.04, transparent:true, opacity:0.7});
+  const particles = new THREE.Points(pGeo, pMat);
+  scene.add(particles);
+
+  // — Target rotation for lerp —
+  let targetRotX = 0, targetRotY = 0;
+
+  // — Scroll state —
+  let scrollY = 0;
+  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, {passive:true});
+
+  // — Animate —
+  const clock = new THREE.Clock();
+  let frameId;
+  const heroEl = document.getElementById('hero');
+
+  function animate(){
+    frameId = requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    // Gem rotation
+    targetRotX += (mouseNY * 0.3 - targetRotX) * 0.04;
+    targetRotY += (mouseNX * 0.3 - targetRotY) * 0.04;
+    gem.rotation.x = t * 0.001 + targetRotX;
+    gem.rotation.y = t * 0.003 + targetRotY;
+    gem.rotation.z = t * 0.0007;
+
+    // Scroll effect on gem
+    const scrollFrac = Math.min(scrollY / window.innerHeight, 1);
+    gem.scale.setScalar(1 - scrollFrac * 0.5);
+    gem.position.y = scrollFrac * 3;
+    gem.position.x = -3;  // medium left
+    gem.children.forEach(c => { if(c.material) c.material.opacity = 1 - scrollFrac * 0.8; });
+
+    // Particles drift
+    const pos = pGeo.attributes.position.array;
+    for(let i = 0; i < pCount; i++){
+      pos[i*3]   += pVel[i].x;
+      pos[i*3+1] += pVel[i].y;
+      pos[i*3+2] += pVel[i].z;
+      if(Math.abs(pos[i*3])   > 20) pVel[i].x *= -1;
+      if(Math.abs(pos[i*3+1]) > 20) pVel[i].y *= -1;
+      if(Math.abs(pos[i*3+2]) > 20) pVel[i].z *= -1;
+    }
+    pGeo.attributes.position.needsUpdate = true;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    const W2 = window.innerWidth, H2 = window.innerHeight;
+    camera.aspect = W2/H2; camera.updateProjectionMatrix();
+    renderer.setSize(W2, H2);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CHROME ENV MAP
+   ══════════════════════════════════════════════════════════════ */
+function makeChromeEnvMap(){
+  const size = IS_MOBILE ? 64 : 128;
+  const cols = [
+    ['#1a1a1a','#555','#2a2a2a'], ['#333','#888','#1a1a1a'],
+    ['#555','#aaa','#3a3a3a'],   ['#0a0a0a','#333','#111'],
+    ['#444','#999','#222'],      ['#222','#666','#1a1a1a']
+  ];
+  const faces = cols.map(c => {
+    const cv = document.createElement('canvas'); cv.width = cv.height = size;
+    const ctx = cv.getContext('2d');
+    const g = ctx.createLinearGradient(0,0,size,size);
+    g.addColorStop(0,c[0]); g.addColorStop(0.5,c[1]); g.addColorStop(1,c[2]);
+    ctx.fillStyle=g; ctx.fillRect(0,0,size,size);
+    for(let j=0;j<80;j++){
+      ctx.beginPath(); ctx.arc(Math.random()*size,Math.random()*size,Math.random()*2+0.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${Math.random()*0.08})`; ctx.fill();
+    }
+    return cv;
+  });
+  const tex = new THREE.CubeTexture(faces); tex.needsUpdate = true;
+  return tex;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   MOUNTAIN SCENE (AVAWATCH)
+   ══════════════════════════════════════════════════════════════ */
+function initMountainScene(){
+  const canvas = document.getElementById('mountain-canvas');
+  const section = document.getElementById('avawatch');
+  let W = canvas.clientWidth || window.innerWidth;
+  let H = canvas.clientHeight || window.innerHeight;
+
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:false});
+  renderer.setSize(W, H); renderer.setPixelRatio(Math.min(DPR,1.5));
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, W/H, 0.1, 200);
+  camera.position.set(0, 2, 12);
+
+  // — Mountains using BufferGeometry —
+  const mtGroup = new THREE.Group();
+  const mtPeaks = [
+    [-12, 0, 0, 6], [-6, 0, -1, 8], [0, 0, 0, 10], [6, 0, -1, 7], [12, 0, 0, 5]
+  ];
+  mtPeaks.forEach(([x, y, z, h]) => {
+    const geo = new THREE.BufferGeometry();
+    const w = 5 + Math.random() * 3;
+    const verts = new Float32Array([
+      x-w, y-4, z,   x+w, y-4, z,   x, y+h, z,
+      x-w, y-4, z,   x, y+h, z,     x-w*0.3, y+h*0.2, z-1,
+      x+w, y-4, z,   x+w*0.3, y+h*0.2, z-1, x, y+h, z,
+    ]);
+    geo.setAttribute('position', new THREE.BufferAttribute(verts, 3));
+    geo.computeVertexNormals();
+    const mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color:0x000000, side:THREE.DoubleSide}));
+    mtGroup.add(mesh);
+    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({color:0x222222}));
+    mtGroup.add(edges);
+  });
+  scene.add(mtGroup);
+
+  // — Chrome horizon line —
+  const horizGeo = new THREE.PlaneGeometry(80, 0.04);
+  const horizMat = new THREE.MeshBasicMaterial({color:0x333333, transparent:true, opacity:0.6});
+  const horizon = new THREE.Mesh(horizGeo, horizMat);
+  horizon.position.set(0, -1, -5); scene.add(horizon);
+
+  // — Snow particles —
+  const sCount = IS_MOBILE ? 500 : 3000;
+  const sGeo = new THREE.BufferGeometry();
+  const sPos = new Float32Array(sCount * 3);
+  const sVel = [];
+  for(let i = 0; i < sCount; i++){
+    sPos[i*3]   = (Math.random()-0.5)*30;
+    sPos[i*3+1] = Math.random()*20 - 2;
+    sPos[i*3+2] = (Math.random()-0.5)*10;
+    sVel.push({x:(Math.random()-0.5)*0.02, y:-(0.02+Math.random()*0.03)});
+  }
+  sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
+  const sMat = new THREE.PointsMaterial({color:0xffffff, size:IS_MOBILE?0.06:0.04, transparent:true, opacity:0.8});
+  scene.add(new THREE.Points(sGeo, sMat));
+
+  let scrollY = 0;
+  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, {passive:true});
+
+  const clock = new THREE.Clock();
+  let inView = false;
+  const obs = new IntersectionObserver(e => { inView = e[0].isIntersecting; }, {threshold:0.01});
+  obs.observe(section);
+
+  (function animate(){
+    requestAnimationFrame(animate);
+    if(!inView) return;
+    const t = clock.getElapsedTime();
+
+    // Snow fall
+    const pos = sGeo.attributes.position.array;
+    for(let i = 0; i < sCount; i++){
+      pos[i*3]   += sVel[i].x;
+      pos[i*3+1] += sVel[i].y;
+      if(pos[i*3+1] < -5){ pos[i*3+1] = 18; pos[i*3] = (Math.random()-0.5)*30; }
+    }
+    sGeo.attributes.position.needsUpdate = true;
+
+    // Parallax
+    const sectionTop = section.getBoundingClientRect().top;
+    camera.position.y = 2 + sectionTop * -0.003;
+
+    renderer.render(scene, camera);
+  })();
+
+  window.addEventListener('resize', () => {
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    if(!W||!H) return;
+    camera.aspect = W/H; camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RADAR CHART (AVAWATCH)
+   ══════════════════════════════════════════════════════════════ */
+function initRadarChart(){
+  const canvas = document.getElementById('radar-canvas');
+  const wrap = document.getElementById('radar-wrap');
+  const W = wrap.clientWidth || 600, H = 400;
+
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+  renderer.setSize(W, H); renderer.setPixelRatio(Math.min(DPR,1.5));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, W/H, 0.1, 100);
+  camera.position.set(0, 3, 8);
+  camera.lookAt(0,0,0);
+
+  const env = makeChromeEnvMap();
+  scene.add(new THREE.AmbientLight(0xffffff, 1));
+  scene.add(new THREE.PointLight(0xffffff, 3, 30));
+
+  const axes = 5;
+  const labels = ['Cost Efficiency','Coverage','Detection Accuracy','Response Speed','Scalability'];
+  const avaData  = [0.9, 0.85, 0.95, 0.9, 0.88];
+  const legData  = [0.3, 0.4,  0.5,  0.35, 0.3];
+  const R = 2.5;
+
+  // — Build axis cylinders —
+  const axisPositions = [];
+  for(let i = 0; i < axes; i++){
+    const angle = (i / axes) * Math.PI * 2 - Math.PI/2;
+    const x = Math.cos(angle) * R, z = Math.sin(angle) * R;
+    axisPositions.push(new THREE.Vector3(x, 0, z));
+    const cyl = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.02, 0.02, 2.5, 6),
+      new THREE.MeshStandardMaterial({color:0x333333, metalness:0.8, roughness:0.3})
+    );
+    cyl.position.set(x, 1.25, z); scene.add(cyl);
+  }
+
+  // — AvaWatch mesh (bright chrome) —
+  const avaPoints = avaData.map((v,i) => {
+    const angle = (i/axes)*Math.PI*2 - Math.PI/2;
+    return new THREE.Vector3(Math.cos(angle)*R*v, 0, Math.sin(angle)*R*v);
+  });
+  avaPoints.push(avaPoints[0]);
+  const avaTube = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(avaPoints, true), 80, 0.04, 6, true);
+  scene.add(new THREE.Mesh(avaTube, new THREE.MeshStandardMaterial({color:0xffffff, metalness:1.0, roughness:0.05, envMap:env, envMapIntensity:2})));
+
+  // — Legacy mesh (dim) —
+  const legPoints = legData.map((v,i) => {
+    const angle = (i/axes)*Math.PI*2 - Math.PI/2;
+    return new THREE.Vector3(Math.cos(angle)*R*v, 0, Math.sin(angle)*R*v);
+  });
+  legPoints.push(legPoints[0]);
+  const legGeo = new THREE.BufferGeometry().setFromPoints(legPoints);
+  scene.add(new THREE.Line(legGeo, new THREE.LineBasicMaterial({color:0x222222})));
+
+  // — Label projection —
+  const labelEls = labels.map((l,i) => document.getElementById(`rl-${i}`));
+  labelEls.forEach((el,i) => { if(el){ el.style.display='block'; el.textContent = labels[i]; }});
+
+  const clock = new THREE.Clock(); let inView = false;
+  const obs = new IntersectionObserver(e=>{inView=e[0].isIntersecting;},{threshold:0.1});
+  obs.observe(wrap);
+
+  const group = new THREE.Group(); group.add(...scene.children.slice(2)); scene.add(group);
+
+  (function animate(){
+    requestAnimationFrame(animate);
+    if(!inView) return;
+    group.rotation.y += 0.005;
+
+    // Update label positions
+    labelEls.forEach((el,i) => {
+      if(!el) return;
+      const worldPos = axisPositions[i].clone();
+      worldPos.applyMatrix4(group.matrixWorld);
+      const projected = worldPos.project(camera);
+      const cx = (projected.x+1)/2 * W;
+      const cy = -(projected.y-1)/2 * H;
+      el.style.left = cx + 'px';
+      el.style.top  = cy + 'px';
+      el.style.transform = 'translate(-50%,-50%)';
+    });
+
+    renderer.render(scene, camera);
+  })();
+
+  window.addEventListener('resize', () => {
+    const W2 = wrap.clientWidth; if(!W2) return;
+    camera.aspect = W2/H; camera.updateProjectionMatrix();
+    renderer.setSize(W2, H);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   NEURAL NETWORK SCENE (JIVHA DARPAN)
+   ══════════════════════════════════════════════════════════════ */
+function initNeuralScene(){
+  const canvas = document.getElementById('neural-canvas');
+  const section = document.getElementById('jivha');
+
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:false});
+  renderer.setPixelRatio(Math.min(DPR,1.5));
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera.position.z = 14;
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+  scene.add(new THREE.PointLight(0xffffff, 2, 50));
+
+  const env = makeChromeEnvMap();
+  const nCount = IS_MOBILE ? 30 : 80;
+  const nodePositions = [];
+  const nodeVel = [];
+  const nodeMeshes = [];
+
+  const nodeMat = new THREE.MeshStandardMaterial({color:0xffffff, metalness:1.0, roughness:0.1, envMap:env});
+  for(let i = 0; i < nCount; i++){
+    const p = new THREE.Vector3((Math.random()-0.5)*16, (Math.random()-0.5)*16, (Math.random()-0.5)*16);
+    nodePositions.push(p);
+    nodeVel.push(new THREE.Vector3((Math.random()-0.5)*0.01,(Math.random()-0.5)*0.01,(Math.random()-0.5)*0.01));
+    const m = new THREE.Mesh(new THREE.SphereGeometry(0.08,8,8), nodeMat.clone());
+    m.position.copy(p); scene.add(m); nodeMeshes.push(m);
+  }
+
+  // — Edges (within distance threshold) —
+  const edgeGroup = new THREE.Group(); scene.add(edgeGroup);
+  const DIST_THRESH = 5;
+
+  function rebuildEdges(){
+    edgeGroup.clear();
+    const mat = new THREE.LineBasicMaterial({color:0x111111});
+    for(let i = 0; i < nCount; i++){
+      for(let j = i+1; j < nCount; j++){
+        const d = nodePositions[i].distanceTo(nodePositions[j]);
+        if(d < DIST_THRESH){
+          const geo = new THREE.BufferGeometry().setFromPoints([nodePositions[i].clone(), nodePositions[j].clone()]);
+          edgeGroup.add(new THREE.Line(geo, mat));
+        }
+      }
+    }
+  }
+  rebuildEdges();
+
+  // — Traveling pulse —
+  const pulseMat = new THREE.MeshBasicMaterial({color:0xffffff});
+  const pulseMesh = new THREE.Mesh(new THREE.SphereGeometry(0.12,8,8), pulseMat);
+  scene.add(pulseMesh); pulseMesh.visible = false;
+  let pulseA = null, pulseB = null, pulseT = 0;
+
+  function launchPulse(){
+    for(let attempt = 0; attempt < 30; attempt++){
+      const a = Math.floor(Math.random()*nCount), b = Math.floor(Math.random()*nCount);
+      if(a !== b && nodePositions[a].distanceTo(nodePositions[b]) < DIST_THRESH){
+        pulseA = nodePositions[a].clone(); pulseB = nodePositions[b].clone();
+        pulseT = 0; pulseMesh.visible = true; return;
+      }
+    }
+  }
+  setInterval(launchPulse, 2000);
+
+  const mainGroup = new THREE.Group();
+  mainGroup.add(...scene.children.filter(c => c !== edgeGroup));
+  mainGroup.add(edgeGroup);
+  scene.add(mainGroup);
+
+  let inView = false, W2 = 0, H2 = 0;
+  const obs = new IntersectionObserver(e=>{inView=e[0].isIntersecting;},{threshold:0.01});
+  obs.observe(section);
+
+  function resize(){
+    W2 = canvas.clientWidth; H2 = canvas.clientHeight;
+    if(!W2||!H2) return;
+    camera.aspect = W2/H2; camera.updateProjectionMatrix();
+    renderer.setSize(W2, H2);
+  }
+  resize(); window.addEventListener('resize', resize);
+
+  let edgeTimer = 0;
+  (function animate(){
+    requestAnimationFrame(animate);
+    if(!inView) return;
+
+    // Drift nodes
+    edgeTimer++;
+    for(let i = 0; i < nCount; i++){
+      nodePositions[i].add(nodeVel[i]);
+      const b = 8;
+      if(Math.abs(nodePositions[i].x) > b) nodeVel[i].x *= -1;
+      if(Math.abs(nodePositions[i].y) > b) nodeVel[i].y *= -1;
+      if(Math.abs(nodePositions[i].z) > b) nodeVel[i].z *= -1;
+      nodeMeshes[i].position.copy(nodePositions[i]);
+    }
+    if(edgeTimer % 20 === 0) rebuildEdges();
+
+    // Pulse
+    if(pulseMesh.visible && pulseA && pulseB){
+      pulseT += 0.015;
+      pulseMesh.position.lerpVectors(pulseA, pulseB, Math.min(pulseT,1));
+      if(pulseT >= 1) pulseMesh.visible = false;
+    }
+
+    mainGroup.rotation.y += 0.001;
+    renderer.render(scene, camera);
+  })();
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TONGUE 3D MAP
+   ══════════════════════════════════════════════════════════════ */
+function initTongueScene(){
+  const canvas = document.getElementById('tongue-canvas');
+  const wrap = document.getElementById('tongue-wrap');
+  let W = wrap.clientWidth || 800, H = wrap.clientHeight || 400;
+
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+  renderer.setSize(W, H); renderer.setPixelRatio(Math.min(DPR,1.5));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, W/H, 0.1, 100);
+  camera.position.set(0, 2, W < 640 ? 9.4 : 8);
+  camera.lookAt(0,0,0);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const keyLight = new THREE.PointLight(0xffffff, 2, 30);
+  keyLight.position.set(3,5,5); scene.add(keyLight);
+
+  // — Tongue body using LatheGeometry —
+  const points = [];
+  for(let i = 0; i <= 20; i++){
+    const t = i/20;
+    const r = Math.sin(t*Math.PI) * 1.3 + 0.1;
+    points.push(new THREE.Vector2(r, (t-0.5)*4));
+  }
+  const tongueGeo = new THREE.LatheGeometry(points, 24);
+  const tongueMat = new THREE.MeshStandardMaterial({color:0x1a1a1a, metalness:0.3, roughness:0.7, emissive:0x111111});
+  const tongue = new THREE.Mesh(tongueGeo, tongueMat);
+  tongue.rotation.x = -Math.PI/2; scene.add(tongue);
+
+  // — Zone overlays —
+  const zones = [
+    {y:1.6,  s:0.3, label:'tl-tip',    intensity:0.6},
+    {y:0.8,  s:0.55, label:'tl-front',  intensity:0.4},
+    {y:-0.1, s:0.65, label:'tl-middle', intensity:0.35},
+    {y:-1.1, s:0.55, label:'tl-back',   intensity:0.25},
+  ];
+  const zoneMeshes = zones.map(z => {
+    const geo = new THREE.PlaneGeometry(z.s*2, z.s*2);
+    const mat = new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:z.intensity, side:THREE.DoubleSide});
+    const m = new THREE.Mesh(geo, mat);
+    m.rotation.x = -Math.PI/2; m.position.set(0, 0.05, -z.y);
+    scene.add(m); return {mesh:m, mat, baseOpacity:z.intensity, labelId:z.label};
+  });
+
+  // — Label positioning —
+  function updateLabels(){
+    const narrow = W < 640;
+    zoneMeshes.forEach((z,i) => {
+      const pos = z.mesh.position.clone().project(camera);
+      const cx = (pos.x+1)/2*W, cy = -(pos.y-1)/2*H;
+      const el = document.getElementById(z.labelId);
+      if(el){
+        const labelW = el.offsetWidth || (narrow ? 150 : 220);
+        const side = narrow ? (i % 2 === 0 ? 1 : -1) : 1;
+        const offset = narrow ? 18 : 80;
+        let left = side > 0 ? cx + offset : cx - offset - labelW;
+        left = Math.max(8, Math.min(left, W - labelW - 8));
+        const top = Math.max(28, Math.min(cy, H - 28));
+        el.classList.toggle('label-left', side < 0);
+        el.style.left = left + 'px';
+        el.style.top = top + 'px';
+        el.style.transform = 'translateY(-50%)';
+      }
+    });
+  }
+
+  // — Raycaster hover —
+  const raycaster = new THREE.Raycaster();
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = ((e.clientX-rect.left)/rect.width)*2-1;
+    const my = -((e.clientY-rect.top)/rect.height)*2+1;
+    raycaster.setFromCamera(new THREE.Vector2(mx,my), camera);
+    const hits = raycaster.intersectObjects(zoneMeshes.map(z=>z.mesh));
+    zoneMeshes.forEach(z => {
+      const hit = hits.find(h=>h.object===z.mesh);
+      z.mat.opacity = hit ? Math.min(z.baseOpacity*2.5, 1) : z.baseOpacity;
+      const el = document.getElementById(z.labelId);
+      if(el) el.style.borderColor = hit ? '#ffffff' : '#222';
+    });
+  });
+
+  const clock = new THREE.Clock(); let inView = false;
+  const obs = new IntersectionObserver(e=>{inView=e[0].isIntersecting;},{threshold:0.1});
+  obs.observe(wrap);
+
+  (function animate(){
+    requestAnimationFrame(animate);
+    if(!inView) return;
+    const t = clock.getElapsedTime();
+    tongue.rotation.z = Math.sin(t*0.5)*0.26; // -15 to +15 deg
+    tongue.rotation.x = -Math.PI/2;
+    zoneMeshes.forEach(z => { z.mesh.rotation.z = tongue.rotation.z; });
+    updateLabels();
+    renderer.render(scene, camera);
+  })();
+
+  function resize(){
+    W = wrap.clientWidth || W;
+    H = wrap.clientHeight || H;
+    if(!W||!H) return;
+    camera.aspect = W/H;
+    camera.position.set(0, W < 640 ? 2.35 : 2, W < 640 ? 9.4 : 8);
+    camera.lookAt(0,0,0);
+    camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+    updateLabels();
+  }
+  window.addEventListener('resize', resize);
+  if('ResizeObserver' in window) new ResizeObserver(resize).observe(wrap);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   WIREFRAME GLOBE (STANDARDS)
+   ══════════════════════════════════════════════════════════════ */
+function initGlobeScene(){
+  const canvas = document.getElementById('globe-canvas');
+  const section = document.getElementById('standards');
+
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:false});
+  renderer.setPixelRatio(Math.min(DPR,1.5));
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera.position.z = 7;
+
+  const globeGeo = new THREE.SphereGeometry(3, 32, 32);
+  const edges = new THREE.EdgesGeometry(globeGeo);
+  const globe = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color:0x1a1a1a}));
+  scene.add(globe);
+
+  let inView = false;
+  const obs = new IntersectionObserver(e=>{inView=e[0].isIntersecting;},{threshold:0.01});
+  obs.observe(section);
+
+  function resize(){
+    const W = canvas.clientWidth, H = canvas.clientHeight;
+    if(!W||!H) return;
+    camera.aspect = W/H; camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+  }
+  resize(); window.addEventListener('resize', resize);
+
+  (function animate(){
+    requestAnimationFrame(animate);
+    if(!inView) return;
+    globe.rotation.y += 0.002;
+    renderer.render(scene, camera);
+  })();
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PARTNER SCENE
+   ══════════════════════════════════════════════════════════════ */
+function initPartnerScene(){
+  const canvas = document.getElementById('partner-canvas');
+  const section = document.getElementById('partner');
+
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:false});
+  renderer.setPixelRatio(Math.min(DPR,1.5));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
+  camera.position.z = 12;
+
+  const env = makeChromeEnvMap();
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const spotPositions = [[5,5,5],[-5,5,5],[5,-5,5],[-5,-5,5]];
+  spotPositions.forEach(p=>{const s=new THREE.PointLight(0xffffff,1.5,40);s.position.set(...p);scene.add(s);});
+
+  // Grid
+  const gridMat = new THREE.LineBasicMaterial({color:0x0d0d0d});
+  for(let i=-20;i<=20;i++){
+    const t=i*2;
+    const lH=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-40,-5,t),new THREE.Vector3(40,-5,t)]);
+    const lV=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(t,-5,-40),new THREE.Vector3(t,-5,40)]);
+    scene.add(new THREE.Line(lH,gridMat)); scene.add(new THREE.Line(lV,gridMat));
+  }
+
+  // Gem (larger)
+  const gem = new THREE.Mesh(
+    new THREE.OctahedronGeometry(3.5, 0),
+    new THREE.MeshStandardMaterial({color:0xffffff, metalness:1.0, roughness:0.02, envMap:env, envMapIntensity:3})
+  );
+  scene.add(gem);
+
+  let inView = false;
+  const obs = new IntersectionObserver(e=>{inView=e[0].isIntersecting;},{threshold:0.01});
+  obs.observe(section);
+
+  function resize(){
+    const W = canvas.clientWidth, H = canvas.clientHeight;
+    if(!W||!H) return;
+    camera.aspect = W/H; camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+  }
+  resize(); window.addEventListener('resize', resize);
+
+  const clock = new THREE.Clock();
+  (function animate(){
+    requestAnimationFrame(animate);
+    if(!inView) return;
+    const t = clock.getElapsedTime();
+    gem.rotation.x = t * 0.002;
+    gem.rotation.y = t * 0.005;
+    renderer.render(scene, camera);
+  })();
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TYPEWRITER
+   ══════════════════════════════════════════════════════════════ */
+function initTypewriter(){
+  const el = document.getElementById('hero-tagline');
+  const cta = document.getElementById('hero-cta');
+  const desc = document.getElementById('hero-desc');
+  const text = "Engineering the Extraordinary. Delivering the Irreplaceable.";
+  let i = 0;
+  el.innerHTML = '<span class="cursor"></span>';
+  function type(){
+    if(i < text.length){
+      el.innerHTML = text.substring(0,i+1) + '<span class="cursor"></span>';
+      i++; setTimeout(type, 45);
+    } else {
+      desc.classList.add('vis');
+      setTimeout(()=>{cta.style.opacity='1';cta.style.transition='opacity 0.8s';}, 600);
+    }
+  }
+  setTimeout(type, 800);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SCROLL REVEAL — IntersectionObserver
+   ══════════════════════════════════════════════════════════════ */
+function initReveal(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        // Stagger siblings
+        const siblings = e.target.parentElement ? [...e.target.parentElement.querySelectorAll('.reveal')] : [];
+        const idx = siblings.indexOf(e.target);
+        setTimeout(() => e.target.classList.add('vis'), idx * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Alert layers (staggered from left)
+  const layerObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        ['layer1','layer2','layer3'].forEach((id,i) => {
+          setTimeout(()=>{const el=document.getElementById(id);if(el)el.classList.add('vis');}, i*150);
+        });
+        layerObs.disconnect();
+      }
+    });
+  }, {threshold:0.2});
+  const l1 = document.getElementById('layer1'); if(l1) layerObs.observe(l1);
+
+  // Standard blocks
+  const stdObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const all = document.querySelectorAll('.standard-block');
+        all.forEach((el,i) => setTimeout(()=>el.classList.add('vis'), i*100));
+        stdObs.disconnect();
+      }
+    });
+  }, {threshold:0.1});
+  const stdFirst = document.querySelector('.standard-block'); if(stdFirst) stdObs.observe(stdFirst);
+
+  // Pillar cols
+  const pillarObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const cols = e.target.querySelectorAll('.pillar-col');
+        cols.forEach((c,i)=>setTimeout(()=>c.classList.add('vis'),i*100));
+        pillarObs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('#jivha-pillars').forEach(el => pillarObs.observe(el));
+
+  // Partner closing
+  const partnerObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        ['pc1','pc2','partner-final'].forEach((id,i)=>{
+          setTimeout(()=>{const el=document.getElementById(id);if(el)el.classList.add('vis');}, i*400);
+        });
+        partnerObs.disconnect();
+      }
+    });
+  }, {threshold:0.3});
+  const pc1 = document.getElementById('pc1'); if(pc1) partnerObs.observe(pc1);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   COUNTERS
+   ══════════════════════════════════════════════════════════════ */
+function initCounters(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const el = e.target;
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        let cur = 0;
+        const steps = 60;
+        const step = target / steps;
+        const iv = setInterval(()=>{
+          cur = Math.min(cur+step, target);
+          el.textContent = Math.round(cur).toLocaleString() + suffix;
+          if(cur >= target) clearInterval(iv);
+        }, 25);
+        obs.unobserve(el);
+      }
+    });
+  }, {threshold:0.5});
+  document.querySelectorAll('[data-count]').forEach(el => obs.observe(el));
+}
+
+/* ══════════════════════════════════════════════════════════════
+   TABLE ANIMATION
+   ══════════════════════════════════════════════════════════════ */
+function initTable(){
+  const rows = document.querySelectorAll('#cmp-table tbody tr');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const idx = [...rows].indexOf(e.target);
+        setTimeout(()=>e.target.classList.add('vis'), idx*80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.3});
+  rows.forEach(r=>obs.observe(r));
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PIPELINE ANIMATION
+   ══════════════════════════════════════════════════════════════ */
+function initPipeline(){
+  const nodes = document.querySelectorAll('.pipe-node');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        nodes.forEach((n,i)=>setTimeout(()=>n.classList.add('vis'),i*120));
+        obs.disconnect();
+      }
+    });
+  }, {threshold:0.3});
+  const pipe = document.getElementById('pipeline'); if(pipe) obs.observe(pipe);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BARRIER SHATTER
+   ══════════════════════════════════════════════════════════════ */
+function initBarriers(){
+  const barriers = document.querySelectorAll('.barrier-bar');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        barriers.forEach((b,i)=>{
+          setTimeout(()=>{
+            b.classList.add('shatter');
+            setTimeout(()=>{
+              const sol = b.nextElementSibling;
+              if(sol) sol.classList.add('vis');
+            }, 900);
+          }, i*300 + 500);
+        });
+        obs.disconnect();
+      }
+    });
+  }, {threshold:0.3});
+  const bg = document.getElementById('barrier-grid'); if(bg) obs.observe(bg);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   EMPHASIS LINES
+   ══════════════════════════════════════════════════════════════ */
+function initEmphasisLines(){
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('animated'); obs.unobserve(e.target); }
+    });
+  }, {threshold:0.5});
+  document.querySelectorAll('.emphasis-line').forEach(el=>obs.observe(el));
+}
+
+/* ══════════════════════════════════════════════════════════════
+   INIT ALL
+   ══════════════════════════════════════════════════════════════ */
+function initAll(){
+  initNav();
+  initTypewriter();
+  initHeroScene();
+  if(!IS_MOBILE){
+    initMountainScene();
+    initNeuralScene();
+    initTongueScene();
+    initGlobeScene();
+    initPartnerScene();
+    initRadarChart();
+  } else {
+    // On mobile, run lighter versions
+    initMountainScene();
+    initTongueScene();
+    initGlobeScene();
+    initPartnerScene();
+  }
+  initReveal();
+  initCounters();
+  initTable();
+  initPipeline();
+  initBarriers();
+  initEmphasisLines();
+}
+</script>
+</body>
+</html>
