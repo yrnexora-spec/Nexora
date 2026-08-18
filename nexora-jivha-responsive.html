@@ -2379,5 +2379,265 @@ function initAll(){
   initEmphasisLines();
 }
 </script>
+
+<!-- ══════════════════════════════════════════════════════
+     BLUE NILE VISIT POPUP
+     ══════════════════════════════════════════════════════ -->
+<style>
+/* ── BlueNile Visit Popup Overlay ── */
+#bn-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#bn-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+#bn-card {
+  position: relative;
+  max-width: 520px;
+  width: 100%;
+  background: linear-gradient(145deg, #0a0a0a 0%, #111111 60%, #0d0d0d 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 2.8rem 2.4rem 2.4rem;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 30px 80px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  transform: translateY(30px) scale(0.96);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  text-align: center;
+}
+#bn-overlay.open #bn-card {
+  transform: translateY(0) scale(1);
+}
+
+/* Close button */
+#bn-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  font-size: 1.3rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.2rem 0.4rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+#bn-close:hover { color: #fff; background: rgba(255,255,255,0.06); }
+
+/* Blue accent top bar */
+#bn-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #1a8cff 30%, #00d4ff 70%, transparent);
+  border-radius: 100%;
+}
+
+/* Emoji / Icon */
+#bn-icon {
+  font-size: 2.6rem;
+  margin-bottom: 0.8rem;
+  display: block;
+  animation: bn-bounce 2s ease-in-out infinite;
+}
+@keyframes bn-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Heading */
+#bn-heading {
+  font-size: clamp(1.15rem, 4vw, 1.45rem);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin-bottom: 1.1rem;
+}
+#bn-heading .bn-blue { color: #1a9fff; }
+
+/* Body copy */
+#bn-body {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 0.6rem;
+}
+#bn-body strong { color: rgba(255,255,255,0.85); font-weight: 700; }
+
+/* Services pills */
+#bn-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  justify-content: center;
+  margin: 1.1rem 0 1.5rem;
+}
+.bn-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  padding: 0.3rem 0.75rem;
+}
+
+/* Tagline */
+#bn-tagline {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 1.6rem;
+}
+#bn-tagline .bn-rocket { font-size: 1rem; }
+
+/* CTA Button */
+#bn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.95rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  box-shadow: 0 4px 24px rgba(37, 211, 102, 0.28), 0 0 0 1px rgba(37,211,102,0.15);
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  cursor: pointer;
+  border: none;
+}
+#bn-cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 36px rgba(37, 211, 102, 0.42), 0 0 0 1px rgba(37,211,102,0.25);
+  filter: brightness(1.08);
+}
+#bn-cta:active { transform: translateY(0) scale(0.98); }
+
+/* WA icon */
+.bn-wa-icon {
+  width: 20px; height: 20px;
+  fill: #fff;
+  flex-shrink: 0;
+}
+
+/* Powered line */
+#bn-footer {
+  margin-top: 1.1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.18);
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  #bn-card { padding: 2.2rem 1.5rem 1.8rem; }
+  #bn-heading { font-size: 1.1rem; }
+}
+</style>
+
+<!-- Popup HTML -->
+<div id="bn-overlay" role="dialog" aria-modal="true" aria-labelledby="bn-heading">
+  <div id="bn-card">
+    <button id="bn-close" aria-label="Close">&times;</button>
+
+    <span id="bn-icon">💙</span>
+
+    <h2 id="bn-heading">
+      Thanks for Visiting <span class="bn-blue">BlueNile</span> Menu!
+    </h2>
+
+    <p id="bn-body">
+      Hope you loved the experience! Want a <strong>digital menu like this for your business?</strong><br>
+      Nexora can build it for you — along with:
+    </p>
+
+    <div id="bn-services">
+      <span class="bn-pill">Websites</span>
+      <span class="bn-pill">Custom Software</span>
+      <span class="bn-pill">POS &amp; KOT Systems</span>
+      <span class="bn-pill">Apps</span>
+      <span class="bn-pill">E-Commerce</span>
+      <span class="bn-pill">AI Solutions</span>
+      <span class="bn-pill">UI/UX</span>
+    </div>
+
+    <p id="bn-tagline">Turn your idea into reality. <span class="bn-rocket">🚀</span></p>
+
+    <a id="bn-cta"
+       href="https://wa.me/918624090075"
+       target="_blank"
+       rel="noopener noreferrer">
+      <svg class="bn-wa-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 0C7.163 0 0 7.163 0 16c0 2.83.737 5.486 2.027 7.796L0 32l8.448-2.007A15.933 15.933 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.293 22.513c-.347.977-2.02 1.87-2.77 1.988-.708.112-1.6.158-2.578-.162-.594-.196-1.356-.457-2.33-.894-4.107-1.773-6.79-5.922-6.993-6.197-.203-.275-1.656-2.203-1.656-4.203s1.05-2.98 1.423-3.387c.373-.407.813-.508 1.084-.508.271 0 .542.003.78.013.25.012.587-.095.916.7.345.823 1.172 2.843 1.276 3.047.103.204.171.44.033.713-.14.275-.207.443-.407.681-.204.239-.43.533-.615.715-.204.204-.416.424-.178.832.237.407 1.054 1.74 2.263 2.817 1.554 1.387 2.865 1.815 3.272 2.02.407.204.647.17.886-.103.238-.271 1.02-1.188 1.29-1.595.27-.407.542-.34.916-.204.374.136 2.374 1.12 2.78 1.323.407.204.678.307.778.475.1.168.1.977-.246 1.954z"/>
+      </svg>
+      Contact Now on WhatsApp
+    </a>
+
+    <p id="bn-footer">Powered by Nexora &mdash; Engineering the Extraordinary</p>
+  </div>
+</div>
+
+<script>
+/* ── BlueNile Visit Popup Logic ── */
+(function(){
+  var path = window.location.pathname.replace(/\/+$/,'').toLowerCase();
+  if(path !== '/bluenilevisit') return;
+
+  var overlay = document.getElementById('bn-overlay');
+  var closeBtn = document.getElementById('bn-close');
+
+  // Open popup after a short delay for a smooth entrance
+  setTimeout(function(){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }, 600);
+
+  function closeBnPopup(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeBnPopup);
+
+  // Close on backdrop click
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay) closeBnPopup();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeBnPopup();
+  });
+})();
+</script>
+
 </body>
 </html>
