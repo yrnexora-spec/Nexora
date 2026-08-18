@@ -2608,8 +2608,20 @@ function initAll(){
 <script>
 /* ── BlueNile Visit Popup Logic ── */
 (function(){
-  var path = window.location.pathname.replace(/\/+$/,'').toLowerCase();
-  if(path !== '/bluenilevisit') return;
+  var hash   = window.location.hash.replace('#','').toLowerCase();
+  var search = window.location.search.toLowerCase();
+  var path   = window.location.pathname.replace(/\/+$/,'').toLowerCase();
+
+  // Triggers:
+  //   Hash:        yoursite.com/page.html#bluenilevisit
+  //   Query param: yoursite.com/page.html?bluenilevisit
+  //   Path:        yoursite.com/bluenilevisit  (server-side routing)
+  var shouldShow =
+        hash === 'bluenilevisit' ||
+        search.indexOf('bluenilevisit') !== -1 ||
+        path.indexOf('bluenilevisit') !== -1;
+
+  if(!shouldShow) return;
 
   var overlay = document.getElementById('bn-overlay');
   var closeBtn = document.getElementById('bn-close');
